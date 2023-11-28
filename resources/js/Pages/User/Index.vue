@@ -1,0 +1,94 @@
+<template>
+    <h1 class="text-3xl mb-4 font-medium">Twoje ogłoszenia</h1>
+    <section class="mb-4">
+        <UserListingsFilter :filters="filters" />
+    </section>
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <Box v-for="listing in listings.data" :key="listing.id" :class="{'border-dashed': listing.deleted_at}">
+            <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
+                <div :class="{'opacity-50': listing.deleted_at}">
+                    <div 
+                        v-if="listing.traded_at" 
+                        class="text-xs font-bold uppercase mb-2 text-green-900 bg-green-300 p-1 rounded-md w-fit"
+                    >
+                        Wymieniono
+                    </div>
+                    <div class="xl:flex items-center gap-2">
+                        <ListingDetails :listing="listing" />
+                    </div>
+                </div>
+                <section>
+                    <div class="flex items-center gap-1 text-gray-600">
+                        <Link 
+                            v-if="!listing.deleted_at" 
+                            class="btn-outline" 
+                            :href="route('listing.show', {listing: listing.id})"
+                        >
+                            Wyświetl
+                        </Link>
+                        <Link 
+                            v-if="!listing.deleted_at" 
+                            class="btn-outline" 
+                            :href="route('user.listing.edit', {listing: listing.id})"
+                        >
+                            Edytuj
+                        </Link>
+
+                        <button v-if="!listing.deleted_at" class="btn-outline" @click.once="deleteListing(listing)">
+                            Usuń
+                        </button>
+
+                        <Link
+                            v-else 
+                            class="btn-outline"
+                            :href="route('user.listing.restore', {listing: listing.id})"
+                            as="button" method="put"
+                        >
+                            Przywróć
+                        </Link>
+                    </div>
+
+                    <div class="mt-2">
+                        <Link 
+                            v-if="!listing.deleted_at"
+                            :href="route('user.listing.image.create', {listing: listing.id})" 
+                            class="block w-full btn-outline text-gray-600 text-center"
+                        >
+                            Zdjęcia ({{ listing.images_count }})
+                        </Link>
+                    </div>
+                    <div class="mt-2">
+                        <Link 
+                            v-if="!listing.deleted_at"
+                            :href="route('user.listing.show', {listing: listing.id})" 
+                            class="block w-full btn-outline text-gray-600 text-center"
+                        >
+                            Oferty wymiany ({{ listing.offers_count }})
+                        </Link>
+                    </div>
+                </section>
+            </div>
+        </Box>
+    </section>
+
+    <section v-if="listings.data.length != 0" class="w-full flex justify-center my-6">
+        <Pagination :links="listings.links" :prev-page-url="listings.prev_page_url" :next-page-url="listings.next_page_url" />
+    </section>
+</template>
+
+<script setup>
+import { Link, router } from '@inertiajs/vue3'
+import Box from '@/Components/UI/Box.vue'
+import ListingDetails from '@/Components/ListingDetails.vue'
+import UserListingsFilter from '@/Components/UserListingsFilter.vue'
+import Pagination from '@/Components/UI/Pagination.vue'
+
+defineProps({
+    listings: Object,
+    filters: Object,
+})
+
+const deleteListing = (listing) => {
+    router.delete(route('user.listing.destroy', {listing: listing.id}))
+}
+</script>

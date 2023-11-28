@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        font-family: 'Roboto', sans-serif;
+    }
+    :root {
+        --text: #0f100f;
+        --background-50: #f2f3f2;
+        --background-200: #f6f7f6;
+        --primary: #1D5934;
+        --secondary: #4EB176;
+        --accent: #305d42;
+        --hover: #294C37;
+      }
+}
+
+@layer components {
+    .label {
+        @apply block mb-1 text-gray-800;
+    }
+    .input {
+        @apply block w-full p-2 rounded-md shadow-sm border border-gray-400 bg-light-background-200 focus:outline-none focus:border-light-secondary focus:ring-1 focus:ring-light-secondary;
+    }
+    .input-error {
+        @apply text-red-600 text-sm;
+    }
+    .btn-primary {
+        @apply bg-light-primary text-white font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover;
+    }
+    .btn-outline {
+        @apply p-2 rounded-md border shadow-sm border-gray-300 hover:border-gray-400
+    }
+}
