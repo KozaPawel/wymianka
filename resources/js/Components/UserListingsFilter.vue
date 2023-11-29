@@ -6,7 +6,7 @@
                     id="deleted" 
                     v-model="filterForm.deleted"
                     type="checkbox" 
-                    class="h-4 w-4 rounded border-gray-300 text-light-accent hover:cursor-pointer hover:border-light-accent focus:ring-offset-0 focus:ring-transparent"
+                    class="input-checkbox"
                 />
                 <label for="deleted" class="hover:cursor-pointer hover:underline">Usunięte</label>
             </div>

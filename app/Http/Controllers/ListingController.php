@@ -53,6 +53,7 @@ class ListingController extends Controller
             $listing->offers()->myOffer()->first();
 
         $filters = [
+
             'categories' => $listing->category()->pluck('id'),
         ];
 

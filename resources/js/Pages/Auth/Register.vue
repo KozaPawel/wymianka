@@ -25,7 +25,7 @@
             <div class="mt-3 text-center md:text-left text-sm">
                 <Link :href="route('login')">
                     Masz już konto? 
-                    <span class="font-bold">Zaloguj się</span>
+                    <span class="font-bold hover:underline">Zaloguj się</span>
                 </Link>
             </div>
         </div>

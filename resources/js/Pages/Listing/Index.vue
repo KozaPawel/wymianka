@@ -1,14 +1,27 @@
 <template>
-    <ListingsFilter :categories="categories" :filters="filters" />
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        <Box v-for="listing in listings.data" :key="listing.id" class="hover:shadow-md">
-            <div>
-                <Link :href="route('listing.show', {listing: listing.id})">
-                    <ListingDetails :listing="listing" class="text-md" />
-                </Link>
-                Kategoria: {{ listing.category.name }}
+    <div class="grid grid-cols-12 gap-2">
+        <!-- <div>
+            Szukanie dla: {{ filters.search }}
+        </div> -->
+        <ListingsFilter :categories="categories" :filters="filters" class="col-span-12 xl:col-span-2" />
+
+        <div class="col-span-12 lg:col-span-10">
+            <div v-if="listings.data.length" class="grid grid-cols-2 xl:grid-cols-3 gap-4">
+                <Box v-for="listing in listings.data" :key="listing.id">
+                    <div>
+                        <Link :href="route('listing.show', {listing: listing.id})">
+                            <ListingDetails :listing="listing" class="text-md" />
+                        </Link>
+                        <p class="break-all">
+                            Kategoria: {{ listing.category.name }}
+                        </p>
+                    </div>
+                </Box>
             </div>
-        </Box>
+            <div v-else class="flex justify-center">
+                <p class="text-3xl font-bold">Brak ogłoszeń</p>
+            </div>
+        </div>
     </div>
     <div v-if="listings.data.length" class="w-full flex justify-center mt-4 mb-4">
         <Pagination :links="listings.links" :prev-page-url="listings.prev_page_url" :next-page-url="listings.next_page_url" />

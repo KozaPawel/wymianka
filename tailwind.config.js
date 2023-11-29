@@ -10,12 +10,13 @@ export default {
       colors: {
         light: {
           'text': 'var(--text)',
-          'background-50': 'var(--background-50)',
+          'background': 'var(--background)',
           'background-200': 'var(--background-200)',
           'primary': 'var(--primary)',
           'secondary': 'var(--secondary)',
           'accent': 'var(--accent)',
           'hover': 'var(--hover)',
+          'hover-gray': 'var(--hover-gray)',
         },
       },
     },

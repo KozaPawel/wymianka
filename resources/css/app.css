@@ -10,27 +10,47 @@
     }
     :root {
         --text: #0f100f;
-        --background-50: #f2f3f2;
+        --background: #f2f3f2;
         --background-200: #f6f7f6;
-        --primary: #1D5934;
+        --primary: #295e11;
+        /* #3f7d23 800
+        #4b8d2c 700
+        #579f37 600
+        #61ae3f 500
+        #77ba5c 400
+        #8ec679 300
+        #aed5a0 200
+        #cde6c4 100
+        #eaf5e7 50 */
         --secondary: #4EB176;
-        --accent: #305d42;
-        --hover: #294C37;
+        --accent: #E8EAEB;
+        --hover: #2b4e1b;
+        --hover-gray: #D8DBDC;
       }
 }
 
 @layer components {
     .label {
-        @apply block mb-1 text-gray-800;
+        @apply block mb-1 hover:cursor-text;
     }
     .input {
-        @apply block w-full p-2 rounded-md shadow-sm border border-gray-400 bg-light-background-200 focus:outline-none focus:border-light-secondary focus:ring-1 focus:ring-light-secondary;
+        @apply block w-full p-2 rounded-md shadow-sm border border-gray-400 transition duration-200 ease-in
+            bg-light-background-200 focus:outline-none focus:border-[#61ae3f] focus:ring-1 focus:ring-[#61ae3f];
+    }
+    .input-checkbox {
+        @apply h-4 w-4 rounded border-gray-300 text-light-primary hover:cursor-pointer hover:border-light-primary focus:ring-offset-0 focus:ring-transparent
     }
     .input-error {
         @apply text-red-600 text-sm;
     }
     .btn-primary {
         @apply bg-light-primary text-white font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover;
+    }
+    .btn-accent {
+        @apply bg-light-accent  font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray;
+    }
+    .accent-text {
+        @apply text-light-text font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray
     }
     .btn-outline {
         @apply p-2 rounded-md border shadow-sm border-gray-300 hover:border-gray-400

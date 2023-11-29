@@ -1,10 +1,10 @@
 <template>
     <div>
         <form @submit.prevent="filter">
-            <div class="mb-4 flex flex-wrap gap-2">
-                <div class="flex flex-nowrap items-center">
+            <div class="bg-light-background-200 rounded shadow-sm p-4 mb-4 flex flex-wrap flex-col gap-2 items-start w-full ">
+                <!-- <div class="flex flex-nowrap items-center">
                     <input v-model="filterForm.search" type="text" placeholder="Search" />
-                </div>
+                </div> -->
                 <!-- zamienić na sortowanie po ocenach użytkowników -->
                 <!-- <div class="flex flex-nowrap items-center">
                     <select>
@@ -14,27 +14,38 @@
                         <option :value="null">Beds</option>
                     </select>
                 </div> -->
+                <h2 class="text-2xl font-medium">Filtry</h2>
+                <h2 class="text-xl">Kategoria</h2>
+                
                 <div v-for="category in categories" :key="category.id" class="flex flex-nowrap items-center gap-2">
                     <input
                         :id="category.id" 
                         v-model="filterForm.categories"
                         :value="category.id"
                         type="checkbox" 
-                        class="h-4 w-4 rounded border-gray-300 text-light-accent hover:cursor-pointer hover:border-light-accent focus:ring-offset-0 focus:ring-transparent"
+                        class="input-checkbox"
                     />
-                    <label :for="category.id" class="hover:cursor-pointer hover:underline">{{ category.name }}</label>
+                    <label :for="category.id" class="hover:cursor-pointer hover:underline break-all">{{ category.name }}</label>
                 </div>
-
-                <button type="submit">Filtruj</button>
-                <button type="reset" @click="reset">Wyczyść filtry</button>
+                
+                <div class="flex flex-col items-center mt-4">
+                    <button type="submit" class="w-fit btn-accent">Zastosuj filtry</button>
+                    <button type="reset" class="w-fit hover:underline text-sm mt-2" @click="reset">Wyczyść filtry</button>
+                </div>
             </div>
         </form>
     </div>
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
-import { useForm, router } from '@inertiajs/vue3'
+import { reactive, computed } from 'vue'
+import { router, usePage } from '@inertiajs/vue3'
+
+const page = usePage()
+
+const searchValue = computed(
+    () => page.props.filters.search,
+)
 
 const props = defineProps({
     filters: Object,
@@ -42,7 +53,7 @@ const props = defineProps({
 })
 
 const filterForm = reactive({
-    search: props.filters.search ?? null,
+    search: searchValue,
     categories: props.filters.categories ?? [],
 })
 
@@ -58,7 +69,6 @@ const filter = () => {
 }
 
 const reset = () => {
-    filterForm.search = null,
     filterForm.categories = [],
     filter()
 }
