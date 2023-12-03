@@ -51,7 +51,7 @@ class UserListingController extends Controller
         $listing->deleteOrFail();
 
         return redirect()->back()
-            ->with('success', 'Usunięto ogłoszenie!');
+            ->with('success', 'Usunięto ogłoszenie');
     }
 
     public function restore(Listing $listing)
@@ -59,7 +59,7 @@ class UserListingController extends Controller
         $listing->restore();
 
         return redirect()->back()
-            ->with('success', 'Przywrócono ogłoszenie!');
+            ->with('success', 'Przywrócono ogłoszenie');
     }
 
     /**
@@ -96,7 +96,7 @@ class UserListingController extends Controller
         // $listing->categories()->associate($category);
 
         return redirect()->route('user.listing.index')
-            ->with('success', 'Stworzono nowe ogłoszenie!');
+            ->with('success', 'Stworzono nowe ogłoszenie');
     }
 
     /**
@@ -127,6 +127,6 @@ class UserListingController extends Controller
         );
 
         return redirect()->route('user.listing.index')
-            ->with('success', 'Zaktualizowano ogłoszenie!');
+            ->with('success', 'Zaktualizowano ogłoszenie');
     }
 }

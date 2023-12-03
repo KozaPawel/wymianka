@@ -1,6 +1,8 @@
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { ZiggyVue } from 'ziggy'
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 import Navbar from '@/Layouts/Navbar.vue'
 import '../css/app.css'
 
@@ -17,6 +19,22 @@ createInertiaApp({
         createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(Toast, {
+                position: 'top-right',
+                timeout: 4000,
+                closeOnClick: true,
+                pauseOnFocusLoss: false,
+                pauseOnHover: true,
+                draggable: true,
+                showCloseButtonOnHover: false,
+                hideProgressBar: false,
+                closeButton: 'button',
+                icon: false,
+                rtl: false,
+                transition: 'Vue-Toastification__bounce',
+                maxToasts: 5,
+                newestOnTop: true,
+            })
             .mount(el)
     },
 })

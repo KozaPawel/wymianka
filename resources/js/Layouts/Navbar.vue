@@ -113,19 +113,16 @@
     </header>
 
     <main class="container mx-auto p-4 w-full">
-        <div v-if="flashMessage" class="mb-4 p-2 border rounded-md bg-light-secondary shadow-sm">
-            {{ flashMessage }}
-        </div>
         <slot />
     </main>
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue'
+import { computed, reactive, watch } from 'vue'
 import { Link, usePage, router } from '@inertiajs/vue3'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue' 
 import { MagnifyingGlassIcon, ChevronDownIcon, UserIcon, PlusIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/20/solid'
-
+import { useToast } from 'vue-toastification'
 
 const page = usePage()
 
@@ -141,6 +138,8 @@ const flashMessage = computed(
     () => page.props.flash.success,
 )
 
+const toast = useToast()
+
 const user = computed(
     () => page.props.user,
 )
@@ -149,11 +148,6 @@ const filterForm = reactive({
     search: props.filters.search ?? '',
     categories: categoryList,
 })
-
-// const homepage = () => {
-//     router.get(route('listing.index')),
-//     filterForm.search = ''
-// }
 
 const search = () => {
     router.get(
@@ -166,4 +160,13 @@ const search = () => {
     ),
     filterForm.search = ''
 }
+
+watch(
+    flashMessage, () => {
+        if(flashMessage.value !== null) {
+            toast.success(flashMessage.value)
+            page.props.flash.success = null
+        }
+    },
+)
 </script>
