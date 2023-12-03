@@ -69,6 +69,10 @@
                 </section>
             </div>
         </Box>
+
+        <div v-if="!listings.data.length" class="text-medium text-xl"> 
+            Brak ogłoszeń do wyświetlenia
+        </div>
     </section>
 
     <section v-if="listings.data.length != 0" class="w-full flex justify-center my-6">

@@ -30,6 +30,9 @@
 }
 
 @layer components {
+    .box {
+        @apply border border-gray-200 bg-light-background-200 rounded-md p-4 shadow-sm
+    }
     .label {
         @apply block mb-1 hover:cursor-text;
     }
@@ -47,12 +50,18 @@
         @apply bg-light-primary text-white font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover;
     }
     .btn-accent {
-        @apply bg-light-accent  font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray;
+        @apply bg-light-accent font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray;
     }
     .accent-text {
         @apply text-light-text font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray
     }
     .btn-outline {
         @apply p-2 rounded-md border shadow-sm border-gray-300 hover:border-gray-400
+    }
+    .menu-icon {
+        @apply mr-2 ml-1 h-5 w-5
+    }
+    .menu-item {
+        @apply flex w-full items-center font-normal text-sm rounded-md px-2 py-2 hover:bg-light-hover-gray
     }
 }

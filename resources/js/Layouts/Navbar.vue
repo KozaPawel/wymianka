@@ -11,37 +11,88 @@
                         <input v-model="filterForm.search" type="text" placeholder="Wyszukaj" class="input h-full bg-white w-1/2 transition-all duration-200 ease-in-out focus:w-full" />
                       
                         <button type="submit" class="btn-accent p-0">
-                            <svg class="h-9 w-8" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
-                                <path d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" />
-                            </svg>
+                            <div class="h-9 w-9 flex items-center justify-center">
+                                <MagnifyingGlassIcon class="h-6" />
+                            </div>
                         </button>
                     </div>
                 </form>
 
-                <div v-if="user" class="flex items-center gap-4">
-                    <Link 
-                        :href="route('user.listing.create')"
-                        class="btn-primary"
-                    >
-                        Dodaj ogłoszenie
-                    </Link>
-                    <Link 
-                        :href="route('user.listing.index')" 
-                        class="accent-text font-bold"
-                    >
-                        {{ user.name }}
-                    </Link>
-                    <div>
-                        <Link 
-                            :href="route('logout')" 
-                            method="delete" 
-                            as="button" 
-                            class="accent-text"
+                <div v-if="user" class="text-right">
+                    <Menu as="div" class="relative inline-block text-left">
+                        <div>
+                            <MenuButton 
+                                class="btn-accent inline-flex w-full justify-center px-4 py-2 text-sm font-medium"
+                            >
+                                {{ user.name }}
+                                <ChevronDownIcon
+                                    class="menu-icon -mr-1"
+                                    aria-hidden="true"
+                                />
+                            </MenuButton>
+                        </div>
+
+                        <transition
+                            enter-active-class="transition duration-100 ease-out"
+                            enter-from-class="transform scale-95 opacity-0"
+                            enter-to-class="transform scale-100 opacity-100"
+                            leave-active-class="transition duration-75 ease-in"
+                            leave-from-class="transform scale-100 opacity-100"
+                            leave-to-class="transform scale-95 opacity-0"
                         >
-                            Wyloguj się
-                        </Link>
-                    </div>
+                            <MenuItems
+                                class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                            >
+                                <div class="px-1 py-1">
+                                    <Link :href="route('user.listing.index')"> 
+                                        <MenuItem>
+                                            <button class="menu-item">
+                                                <UserIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Profil
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+
+                                    <Link :href="route('user.listing.create')"> 
+                                        <MenuItem>
+                                            <button class="menu-item">
+                                                <PlusIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Dodaj ogłoszenie
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+                                </div>
+
+                                <div class="px-1 py-1">
+                                    <Link
+                                        :href="route('logout')" 
+                                        method="delete"
+                                        as="button"
+                                        class="w-full"
+                                    > 
+                                        <MenuItem v-slot="{ active }">
+                                            <button class="menu-item hover:bg-[#C1C4C6]">
+                                                <ArrowRightOnRectangleIcon
+                                                    :active="active"
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Wyloguj
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+                                </div>
+                            </MenuItems>
+                        </transition>
+                    </Menu>
                 </div>
+
                 <div v-else class="flex items-center gap-4">
                     <Link 
                         :href="route('register')" 
@@ -72,6 +123,9 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import { Link, usePage, router } from '@inertiajs/vue3'
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue' 
+import { MagnifyingGlassIcon, ChevronDownIcon, UserIcon, PlusIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/20/solid'
+
 
 const page = usePage()
 

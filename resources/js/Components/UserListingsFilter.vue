@@ -1,6 +1,16 @@
 <template>
     <form>
-        <div class="flex flex-wrap mb-4 mt-4 gap-2">
+        <div class="flex flex-wrap flex-col mb-4 mt-4 gap-2">
+            <div class="flex gap-1">
+                <select v-model="filterForm.by" class="w-32 input">
+                    <option value="created_at">Dodano</option>
+                    <option value="updated_at">Edytowano</option>
+                </select>
+                <select v-model="filterForm.order" class="w-44 input">
+                    <option value="desc">- od najnowszych</option>
+                    <option value="asc">- od najstarszych</option>
+                </select>
+            </div>
             <div class="flex flex-nowrap items-center gap-2">
                 <input
                     id="deleted" 
@@ -9,16 +19,6 @@
                     class="input-checkbox"
                 />
                 <label for="deleted" class="hover:cursor-pointer hover:underline">Usunięte</label>
-            </div>
-            <div>
-                <select v-model="filterForm.by" class="w-30">
-                    <option value="created_at">Dodano</option>
-                    <option value="updated_at">Edytowano</option>
-                </select>
-                <select v-model="filterForm.order" class="w-30">
-                    <option value="desc">- od najnowszych</option>
-                    <option value="asc">- od najstarszych</option>
-                </select>
             </div>
         </div>
     </form>

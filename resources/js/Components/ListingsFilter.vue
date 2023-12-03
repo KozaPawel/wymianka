@@ -1,7 +1,7 @@
 <template>
     <div>
         <form @submit.prevent="filter">
-            <div class="bg-light-background-200 rounded shadow-sm p-4 mb-4 flex flex-wrap flex-col gap-2 items-start w-full ">
+            <div class="box mb-4 flex flex-wrap flex-col gap-2 items-start w-full ">
                 <!-- <div class="flex flex-nowrap items-center">
                     <input v-model="filterForm.search" type="text" placeholder="Search" />
                 </div> -->
