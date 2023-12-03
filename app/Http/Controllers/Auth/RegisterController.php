@@ -33,6 +33,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         return redirect()->route('listing.index')
-            ->with('success', 'Stworzono nowe konto i zalogowano!');
+            ->with('success', 'Stworzono nowe konto i zalogowano');
     }
 }
