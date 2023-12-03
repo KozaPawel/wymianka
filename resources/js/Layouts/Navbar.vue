@@ -22,7 +22,7 @@
                     <Menu as="div" class="relative inline-block text-left">
                         <div>
                             <MenuButton 
-                                class="btn-accent inline-flex w-full justify-center px-4 py-2 text-sm font-medium"
+                                class="text-accent inline-flex w-full justify-center px-4 py-2 text-sm font-medium"
                             >
                                 {{ user.name }}
                                 <ChevronDownIcon
@@ -96,7 +96,7 @@
                 <div v-else class="flex items-center gap-4">
                     <Link 
                         :href="route('register')" 
-                        class="accent-text"
+                        class="text-accent"
                     >
                         Zarejestruj się
                     </Link>

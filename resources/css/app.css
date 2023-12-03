@@ -52,7 +52,7 @@
     .btn-accent {
         @apply bg-light-accent font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray;
     }
-    .accent-text {
+    .text-accent {
         @apply text-light-text font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray
     }
     .btn-outline {
