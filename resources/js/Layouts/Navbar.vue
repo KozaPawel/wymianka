@@ -6,18 +6,6 @@
                     <Link :href="route('listing.index')">Wymianka</Link>
                 </div>
 
-                <form class="w-1/4 " @submit.prevent="search">
-                    <div class="flex flex-row items-center justify-center gap-1 ">
-                        <input v-model="filterForm.search" type="text" placeholder="Wyszukaj" class="input h-full bg-white w-1/2 transition-all duration-200 ease-in-out focus:w-full" />
-                      
-                        <button type="submit" class="btn-accent p-0">
-                            <div class="h-9 w-9 flex items-center justify-center">
-                                <MagnifyingGlassIcon class="h-6" />
-                            </div>
-                        </button>
-                    </div>
-                </form>
-
                 <div v-if="user" class="text-right">
                     <Menu as="div" class="relative inline-block text-left">
                         <div>
@@ -117,11 +105,10 @@
 </template>
 
 <script setup>
-import { computed, reactive, watch } from 'vue'
-import { Link, usePage, router } from '@inertiajs/vue3'
+import { computed, watch } from 'vue'
+import { Link, usePage } from '@inertiajs/vue3'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue' 
 import { 
-    MagnifyingGlassIcon, 
     ChevronDownIcon, 
     UserIcon, 
     PlusIcon, 
@@ -130,14 +117,6 @@ import {
 import { useToast } from 'vue-toastification'
 
 const page = usePage()
-
-const props = defineProps({
-    filters: Object,
-})
-
-const categoryList = computed(
-    () => page.props.filters.categories,
-)
 
 const flashMessage = computed(
     () => page.props.flash.success,
@@ -148,23 +127,6 @@ const toast = useToast()
 const user = computed(
     () => page.props.user,
 )
-
-const filterForm = reactive({
-    search: props.filters.search ?? '',
-    categories: categoryList,
-})
-
-const search = () => {
-    router.get(
-        route('listing.index'),
-        filterForm,
-        {
-            preserveState: true,
-            preserveScroll: true,
-        },
-    ),
-    filterForm.search = ''
-}
 
 watch(
     flashMessage, () => {
