@@ -120,7 +120,13 @@
 import { computed, reactive, watch } from 'vue'
 import { Link, usePage, router } from '@inertiajs/vue3'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue' 
-import { MagnifyingGlassIcon, ChevronDownIcon, UserIcon, PlusIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/20/solid'
+import { 
+    MagnifyingGlassIcon, 
+    ChevronDownIcon, 
+    UserIcon, 
+    PlusIcon, 
+    ArrowRightOnRectangleIcon, 
+} from '@heroicons/vue/20/solid'
 import { useToast } from 'vue-toastification'
 
 const page = usePage()
