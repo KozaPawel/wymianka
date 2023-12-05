@@ -11,7 +11,9 @@ createInertiaApp({
     resolve: async (name) => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         const page = (await pages[`./Pages/${name}.vue`])
-        page.default.layout = page.default.layout || Navbar
+        if (page.default.layout === undefined) {
+            page.default.layout = Navbar
+        }
 
         return page
     },
