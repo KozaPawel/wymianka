@@ -1,8 +1,5 @@
 <template>
     <div class="grid grid-cols-12 gap-2">
-        <!-- <div>
-            Szukanie dla: {{ filters.search }}
-        </div> -->
         <ListingsFilter :categories="categories" :filters="filters" class="col-span-12 xl:col-span-2" />
 
         <div class="col-span-12 lg:col-span-10">

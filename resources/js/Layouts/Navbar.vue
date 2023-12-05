@@ -1,5 +1,5 @@
 <template>
-    <header class="sticky top-0 shadow-md w-full bg-light-background-200">
+    <header class="sticky top-0 z-10 shadow-md w-full bg-light-background-200">
         <div class="container mx-auto">
             <nav class="flex p-4 items-center justify-between">
                 <div class="text-xl font-bold text-light-primary">
@@ -120,7 +120,13 @@
 import { computed, reactive, watch } from 'vue'
 import { Link, usePage, router } from '@inertiajs/vue3'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue' 
-import { MagnifyingGlassIcon, ChevronDownIcon, UserIcon, PlusIcon, ArrowRightOnRectangleIcon } from '@heroicons/vue/20/solid'
+import { 
+    MagnifyingGlassIcon, 
+    ChevronDownIcon, 
+    UserIcon, 
+    PlusIcon, 
+    ArrowRightOnRectangleIcon, 
+} from '@heroicons/vue/20/solid'
 import { useToast } from 'vue-toastification'
 
 const page = usePage()

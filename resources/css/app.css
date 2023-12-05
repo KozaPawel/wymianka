@@ -64,4 +64,7 @@
     .menu-item {
         @apply flex w-full items-center font-normal text-sm rounded-md px-2 py-2 hover:bg-light-hover-gray
     }
+    .carousel-arrow {
+        @apply box-content bg-light-background border border-solid border-gray-200 rounded-md text-light-text
+    }
 }
