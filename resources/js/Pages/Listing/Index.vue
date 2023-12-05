@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import {  computed, reactive } from 'vue'
+import { computed, reactive } from 'vue'
 import { Link,  router, usePage } from '@inertiajs/vue3'
 import ListingDetails from '@/Components/ListingDetails.vue'
 import Box from '@/Components/UI/Box.vue'
