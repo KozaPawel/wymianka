@@ -15,7 +15,7 @@
                     v-for="offer in props.listing.offers" 
                     :key="offer.id" 
                     :offer="offer" 
-                    :is-offer-chosen="props.listing.traded_at != null"
+                    :is-offer-chosen="props.listing.data.traded_at != null"
                 />
             </div>
         </div>
@@ -23,7 +23,7 @@
         <div class="md:col-span-5 items-center">
             <Box>
                 <template #header>Informacje o przedmiocie</template>
-                <ListingDetails :listing="listing" />
+                <ListingDetails :listing="listing.data" />
             </Box>
         </div>
     </section>

@@ -2,7 +2,7 @@
     <Box v-if="listing.images.length < 6">
         <template #header>
             Prześlij nowe zdjęcia 
-            <span class="text-sm">(maksymalny rozmiar 5MB)</span>
+            <span class="text-sm">(maksymalny rozmiar zdjęcia 5MB)</span>
         </template>
         <form @submit.prevent="upload">
             <section class="flex items-center gap-2 my-4">
