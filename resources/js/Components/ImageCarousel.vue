@@ -55,8 +55,6 @@
             />
             <Pagination v-if="numberOfImages > 1" />
         </template>
-
-        <p>{{ isModalOpen }}</p>
     </Carousel>
             
     <div v-else class="w-full text-center font-medium">
