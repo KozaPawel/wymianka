@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ListingOfferResource;
+use App\Http\Resources\ListingResource;
 use App\Models\Category;
 use App\Models\Listing;
 use Illuminate\Http\Request;
@@ -21,18 +23,19 @@ class UserListingController extends Controller
             ...$request->only(['by', 'order']),
         ];
 
+        $listings = Listing::mostRecent()
+            ->where('user_id', Auth::user()->id)
+            ->withCount('offers')
+            ->withCount('images')
+            ->filter($filters)
+            ->paginate(8)
+            ->withQueryString();
+
         return inertia(
             'User/Index',
             [
                 'filters' => $filters,
-                'listings' => Auth::user()
-                    ->listings()
-                    ->filter($filters)
-                    ->mostRecent()
-                    ->withCount('offers')
-                    ->withCount('images')
-                    ->paginate(8)
-                    ->withQueryString(),
+                'listings' => ListingResource::collection($listings),
             ]);
     }
 
@@ -41,7 +44,7 @@ class UserListingController extends Controller
         return inertia(
             'User/Show',
             [
-                'listing' => $listing->load('offers', 'offers.trader'),
+                'listing' => ListingOfferResource::make($listing),
             ]
         );
     }
@@ -62,13 +65,8 @@ class UserListingController extends Controller
             ->with('success', 'Przywrócono ogłoszenie');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        // $this->authorize('create', Listing::class);
-
         return inertia(
             'User/Create',
             [
@@ -77,9 +75,6 @@ class UserListingController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $listing = $request->user()->listings()->create(
@@ -99,23 +94,17 @@ class UserListingController extends Controller
             ->with('success', 'Stworzono nowe ogłoszenie');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Listing $listing)
     {
         return inertia(
             'User/Edit',
             [
-                'listing' => $listing,
+                'listing' => ListingResource::make($listing),
             ]
         );
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Listing $listing)
     {
         $listing->update(

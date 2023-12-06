@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ListingResource;
 use App\Models\Listing;
 use App\Models\ListingImage;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class ListingImageController extends Controller
         return inertia(
             'User/ListingImage/Create',
             [
-                'listing' => $listing,
+                'listing' => ListingResource::make($listing),
             ]
         );
     }

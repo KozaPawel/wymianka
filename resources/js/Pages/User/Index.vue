@@ -76,7 +76,7 @@
     </section>
 
     <section v-if="listings.data.length != 0" class="w-full flex justify-center my-6">
-        <Pagination :links="listings.links" :prev-page-url="listings.prev_page_url" :next-page-url="listings.next_page_url" />
+        <Pagination :links="listings.meta.links" :prev-page-url="listings.links.prev" :next-page-url="listings.links.next" />
     </section>
 </template>
 

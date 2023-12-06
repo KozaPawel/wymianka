@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
+use App\Http\Resources\ListingResource;
 use App\Models\Category;
 use App\Models\Listing;
 use Illuminate\Http\Request;
@@ -14,9 +16,6 @@ class ListingController extends Controller
         $this->authorizeResource(Listing::class, 'listing');
     }
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $filters = $request->only([
@@ -24,8 +23,7 @@ class ListingController extends Controller
             'categories',
         ]);
 
-        $listings = Listing::with('category')
-            ->mostRecent()
+        $listings = Listing::mostRecent()
             ->filter($filters)
             ->withoutTraded()
             ->paginate(12)
@@ -35,25 +33,18 @@ class ListingController extends Controller
             'Listing/Index',
             [
                 'filters' => $filters,
-                'categories' => Category::all(),
-                'listings' => $listings,
+                'categories' => CategoryResource::collection(Category::all()),
+                'listings' => ListingResource::collection($listings),
             ]
         );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Listing $listing)
     {
-        // dd($listing->user_id === Auth::user()?->id);
-        $listing->load('images');
-
         $offer = ! Auth::user() ? null :
             $listing->offers()->myOffer()->first();
 
         $filters = [
-
             'categories' => $listing->category()->pluck('id'),
         ];
 
@@ -61,22 +52,15 @@ class ListingController extends Controller
             Auth::user()
                 ->listings()
                 ->filter($filters)
-                ->get()
-                ->load('images');
-
-        // $userListings->load('images');
-
-        // if (Auth::user() ? true : false) {
-
-        // }
+                ->get();
 
         return inertia(
             'Listing/Show',
             [
-                'listing' => $listing,
-                'category' => $listing->category,
+                'listing' => ListingResource::make($listing),
+                'category' => CategoryResource::make($listing->category),
                 'offer' => $offer,
-                'userListings' => $userListings,
+                'userListings' => ListingResource::collection($userListings),
             ]
         );
     }

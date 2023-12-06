@@ -32,7 +32,7 @@
                             <ListingDetails :listing="listing" class="text-md" />
                         </Link>
                         <p class="break-all">
-                            Kategoria: {{ listing.category.name }}
+                            Kategoria: {{ listing.category_name }}
                         </p>
                     </div>
                 </Box>
@@ -43,7 +43,7 @@
         </div>
     </div>
     <div v-if="props.listings.data.length" class="w-full flex justify-center mt-4 mb-4">
-        <Pagination :links="props.listings.links" :prev-page-url="props.listings.prev_page_url" :next-page-url="props.listings.next_page_url" />
+        <Pagination :links="props.listings.meta.links" :prev-page-url="props.listings.links.prev" :next-page-url="props.listings.links.next" />
     </div>
 </template>
 
