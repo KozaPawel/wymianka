@@ -24,9 +24,9 @@ class ListingResource extends JsonResource
             'description' => $this->description,
             'city' => $this->city,
             'images' => ListingImageResource::collection($this->images),
-            'images_count' => $this->images_count,
-            'offers_count' => $this->offers_count,
-            'traded_at' => $this->traded_at,
+            'images_count' => $this->whenNotNull($this->images_count),
+            'offers_count' => $this->whenNotNull($this->offers_count),
+            'traded_at' => $this->whenNotNull($this->traded_at),
         ];
     }
 }
