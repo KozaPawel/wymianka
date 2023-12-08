@@ -21,6 +21,9 @@
         </form>
     </div>
 
+    <TownSearch @towns="towns = $event" />
+    {{ towns }}
+
     <div class="grid grid-cols-12 gap-2">
         <ListingsFilter :categories="props.categories" :filters="props.filters" class="col-span-12 lg:col-span-2" />
 
@@ -48,12 +51,13 @@
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue'
-import { Link,  router, usePage } from '@inertiajs/vue3'
+import { computed, reactive, ref } from 'vue'
+import { Link, router, usePage } from '@inertiajs/vue3'
 import ListingDetails from '@/Components/ListingDetails.vue'
 import Box from '@/Components/UI/Box.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 import ListingsFilter from '@/Components/ListingsFilter.vue'
+import TownSearch from '@/Components/TownSearch.vue'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
@@ -61,6 +65,8 @@ const props = defineProps({
     categories: Object,
     filters: Object,
 })
+
+const towns = ref({})
 
 const page = usePage()
 

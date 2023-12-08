@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
+use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserListingAcceptOfferController;
 use App\Http\Controllers\UserListingController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,8 @@ Route::get('/register', [RegisterController::class, 'index'])
     ->name('register')->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store'])
     ->name('register.store');
+
+Route::get('/towns', TownController::class)->name('towns');
 
 Route::prefix('user')
     ->name('user.')
