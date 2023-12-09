@@ -41,6 +41,14 @@ class Listing extends Model
         );
     }
 
+    public function town(): BelongsTo
+    {
+        return $this->belongsTo(
+            Town::class,
+            'town_id'
+        );
+    }
+
     public function images(): HasMany
     {
         return $this->hasMany(
@@ -88,6 +96,9 @@ class Listing extends Model
                 $filters['categories'] ?? $query,
                 fn ($query, $value) => empty($filters['categories']) ? $query :
                 $query->whereIn('category_id', $filters['categories'])
+            )->when(
+                $filters['town'] ?? false,
+                fn ($query, $value) => $query->where('town_id', $value)
             );
     }
 }

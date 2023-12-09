@@ -7,12 +7,9 @@ use Illuminate\Database\Seeder;
 
 class TownSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        Town::truncate();
+        // Town::truncate();
 
         $csvFile = fopen(base_path('database/data/towns.csv'), 'r');
 

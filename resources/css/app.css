@@ -40,8 +40,10 @@
     }
     .input {
         @apply block w-full p-2 rounded-md shadow-sm border border-gray-400 transition duration-200 ease-in
-            bg-light-background-200 focus:outline-none focus:border-[#61ae3f] focus:ring-1 focus:ring-[#61ae3f];
+            bg-light-background-200 focus:outline-none focus:ring-0;
     }
+
+    /* focus:outline-none focus:border-[#61ae3f] focus:ring-1 focus:ring-[#61ae3f] */
     .input-checkbox {
         @apply h-4 w-4 rounded border-gray-300 text-light-primary hover:cursor-pointer hover:border-light-primary focus:ring-offset-0 focus:ring-transparent
     }

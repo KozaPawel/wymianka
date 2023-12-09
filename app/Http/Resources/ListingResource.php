@@ -20,6 +20,8 @@ class ListingResource extends JsonResource
             'user_name' => $this->owner->name,
             'category_id' => $this->category_id,
             'category_name' => $this->category->name,
+            'town_id' => $this->town_id,
+            'town_name' => $this->town->name,
             'name' => $this->name,
             'description' => $this->description,
             'city' => $this->city,

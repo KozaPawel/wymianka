@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Town;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -16,6 +17,8 @@ return new class extends Migration
                 ->constrained('users');
             $table->foreignIdFor(Category::class, 'category_id')
                 ->constrained('categories');
+            $table->foreignIdFor(Town::class, 'town_id')
+                ->constrained('towns');
             $table->string('name');
             $table->string('description');
             $table->tinyText('city');

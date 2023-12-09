@@ -3,11 +3,11 @@
         <Combobox v-model="selectedTown">
             <div class="relative">
                 <div
-                    class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+                    class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-sm  sm:text-sm"
                 >
                     <ComboboxInput
                         :display-value="(town) => `${town.name ? town.name + ',' : ''} ${town.county ? town.county + ',': ''} ${town.province ? town.province : ''}`.trim()"
-                        class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 "
+                        class="input w-full bg-white border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 "
                         autocomplete="off"
                         placeholder="Wyszukaj miasto"
                         @change="handleInputChange"
@@ -52,13 +52,14 @@
                             v-slot="{ selectedTown, active }"
                             as="template"
                             :value="town"
-                            class="hover:cursor-pointer"
+                            class="hover:cursor-pointer border-b-2 border-gray-200"
                             @click="handleSelectedItem(town)"
                         >
                             <li
-                                class="relative cursor-default select-none py-2 pl-10 pr-4 text-gray-900"
+                                class="relative cursor-default select-none py-2 px-4 text-gray-900"
                                 :class="{
                                     'bg-[#61ae3f]': active,
+                                    'border-none': towns[towns.length - 1] === town
                                 }"
                             >
                                 <span

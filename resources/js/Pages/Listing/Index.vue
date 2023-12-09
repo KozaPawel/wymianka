@@ -8,21 +8,24 @@
                 <span v-if="isSearching"> > {{ page.props.filters.search }} </span>
             </p>
         </div>
-        <form class="w-full md:w-1/2 lg:w-1/4 col-span-12" @submit.prevent="search">
-            <div class="flex flex-row items-center justify-end gap-1 ">
-                <input v-model="filterForm.search" type="text" placeholder="Wyszukaj" class="input h-full bg-white md:w-1/2 transition-all duration-200 ease-in-out focus:w-full" />
-                      
-                <button type="submit" class="btn-accent p-0">
-                    <div class="h-9 w-9 flex items-center justify-center">
-                        <MagnifyingGlassIcon class="h-6" />
-                    </div>
-                </button>
-                <div />
+        <form class="flex flex-col gap-1 md:flex-row items-center justify-end w-full md:w-1/2 lg:w-3/4 col-span-12" @submit.prevent="search">
+            <div class="flex flex-row items-center justify-end w-full">
+                <input 
+                    v-model="filterForm.search" 
+                    type="text" 
+                    placeholder="Wyszukaj" 
+                    class="input text-sm border-none bg-white lg:w-1/3"
+                />
             </div>
+
+            <TownSearch class="w-full md:w-96" @selected-town="filterForm.town = $event.id" />
+            
+            <button type="submit" class="btn-accent p-0">
+                <div class="h-9 w-9 flex items-center justify-center">
+                    <MagnifyingGlassIcon class="h-6" />
+                </div>
+            </button>
         </form>
-        <div class="w-full lg:w-1/2">
-            <TownSearch @selected-town="town = $event" />
-        </div>
     </div>
 
     <div class="grid grid-cols-12 gap-2">
@@ -37,6 +40,8 @@
                         </Link>
                         <p class="break-all">
                             Kategoria: {{ listing.category_name }}
+                            <br />
+                            Miasto: {{ listing.town_name }}
                         </p>
                     </div>
                 </Box>
@@ -52,7 +57,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from 'vue'
+import { computed, reactive } from 'vue'
 import { Link, router, usePage } from '@inertiajs/vue3'
 import ListingDetails from '@/Components/ListingDetails.vue'
 import Box from '@/Components/UI/Box.vue'
@@ -67,8 +72,6 @@ const props = defineProps({
     filters: Object,
 })
 
-const town = ref({})
-
 const page = usePage()
 
 const categoryList = computed(
@@ -78,6 +81,7 @@ const categoryList = computed(
 const filterForm = reactive({
     search: props.filters.search ?? '',
     categories: categoryList,
+    town: props.filters.town ?? '',
 })
 
 const isSearching = computed(

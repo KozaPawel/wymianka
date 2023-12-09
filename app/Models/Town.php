@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Town extends Model
 {
@@ -23,6 +24,14 @@ class Town extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function listings(): HasMany
+    {
+        return $this->hasMany(
+            Listing::class,
+            'town_id'
+        );
+    }
 
     public function scopeMostRecent(Builder $query): Builder
     {
