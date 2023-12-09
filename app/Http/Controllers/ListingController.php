@@ -61,7 +61,7 @@ class ListingController extends Controller
                 'listing' => ListingResource::make($listing),
                 'category' => CategoryResource::make($listing->category),
                 'offer' => $offer,
-                'userListings' => ListingResource::collection($userListings),
+                'userListings' => $userListings ? ListingResource::collection($userListings) : null,
             ]
         );
     }
