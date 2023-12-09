@@ -25,6 +25,7 @@ class TownSeeder extends Seeder
                     'province' => $data['2'],
                     'lat' => $data['3'],
                     'lon' => $data['4'],
+                    'search' => $data['0'].(! empty($data['1']) ? ' '.$data['1'] : '').' '.$data['2'],
                 ]);
             }
             $firstline = false;

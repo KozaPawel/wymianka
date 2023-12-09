@@ -15,8 +15,8 @@ class TownController extends Controller
 
         $towns = Town::mostRecent()
             ->filter($filters)
-            ->paginate(10)
-            ->take(10);
+            ->paginate(20)
+            ->take(20);
 
         return response()->json($towns);
     }

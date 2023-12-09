@@ -17,12 +17,13 @@
                         <MagnifyingGlassIcon class="h-6" />
                     </div>
                 </button>
+                <div />
             </div>
         </form>
+        <div class="w-full lg:w-1/2">
+            <TownSearch @selected-town="town = $event" />
+        </div>
     </div>
-
-    <TownSearch @towns="towns = $event" />
-    {{ towns }}
 
     <div class="grid grid-cols-12 gap-2">
         <ListingsFilter :categories="props.categories" :filters="props.filters" class="col-span-12 lg:col-span-2" />
@@ -66,7 +67,7 @@ const props = defineProps({
     filters: Object,
 })
 
-const towns = ref({})
+const town = ref({})
 
 const page = usePage()
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('province');
             $table->double('lat');
             $table->double('lon');
+            $table->string('search');
             $table->timestamps();
         });
     }

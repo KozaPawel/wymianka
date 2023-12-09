@@ -9,10 +9,11 @@
         font-family: 'Roboto', sans-serif;
     }
     :root {
+        /* #295e11 */
         --text: #0f100f;
         --background: #f2f3f2;
         --background-200: #f6f7f6;
-        --primary: #295e11;
+        --primary: #4b8d2c;
         /* #3f7d23 800
         #4b8d2c 700
         #579f37 600
@@ -24,8 +25,9 @@
         #eaf5e7 50 */
         --secondary: #4EB176;
         --accent: #E8EAEB;
-        --hover: #2b4e1b;
+        --hover: #3f7d23;
         --hover-gray: #D8DBDC;
+
       }
 }
 

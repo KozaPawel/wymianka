@@ -16,6 +16,7 @@ class Town extends Model
         'province',
         'lat',
         'lon',
+        'search',
     ];
 
     protected $hidden = [
@@ -33,7 +34,7 @@ class Town extends Model
         return $query
             ->when(
                 $filters['towns'] ?? false,
-                fn ($query, $value) => $query->where('name', 'like', "{$value}%")
+                fn ($query, $value) => $query->where('search', 'like', "{$value}%")
             );
     }
 }
