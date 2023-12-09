@@ -1,8 +1,11 @@
 <template>
     <div class="h-full w-full flex flex-col md:flex-row md:justify-between mb-2">
-        <div class="font-bold text-3xl mb-2 break-words">
+        <div class="font-bold text-3xl mb-2 break-words w-full">
             <p>
-                <Link :href="route('listing.index')" :class="{'hover:underline': isSearching, 'pointer-events-none': !isSearching}">
+                <Link 
+                    :href="route('listing.index')" 
+                    :class="{'hover:underline': (isSearching || isSearchingTown), 'pointer-events-none': !(isSearching || isSearchingTown)}"
+                >
                     Wszystkie ogłoszenia
                 </Link>
                 <span v-if="isSearching"> > {{ page.props.filters.search }} </span>
@@ -18,7 +21,7 @@
                 />
             </div>
 
-            <TownSearch class="w-full md:w-96" @selected-town="filterForm.town = $event.id" />
+            <TownSearch @selected-town="filterForm.town = $event.id" />
             
             <button type="submit" class="btn-accent p-0">
                 <div class="h-9 w-9 flex items-center justify-center">
@@ -86,6 +89,10 @@ const filterForm = reactive({
 
 const isSearching = computed(
     () => page.props.filters.search != null,
+)
+
+const isSearchingTown = computed(
+    () => page.props.filters.town != null,
 )
 
 const search = () => {

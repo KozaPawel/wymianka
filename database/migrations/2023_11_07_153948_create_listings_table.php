@@ -21,7 +21,6 @@ return new class extends Migration
                 ->constrained('towns');
             $table->string('name');
             $table->string('description');
-            $table->tinyText('city');
             $table->timestamp('traded_at')
                 ->nullable();
             $table->timestamps();

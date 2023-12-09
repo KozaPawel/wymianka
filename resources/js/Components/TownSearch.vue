@@ -1,5 +1,5 @@
 <template>
-    <div class="w-96">
+    <div class="w-full md:w-96">
         <Combobox v-model="selectedTown">
             <div class="relative">
                 <div
@@ -9,7 +9,7 @@
                         :display-value="(town) => `${town.name ? town.name + ',' : ''} ${town.county ? town.county + ',': ''} ${town.province ? town.province : ''}`.trim()"
                         class="input w-full bg-white border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 "
                         autocomplete="off"
-                        placeholder="Wyszukaj miasto"
+                        :placeholder="props.placeholder ? props.placeholder : 'Wyszukaj miasto'"
                         @change="handleInputChange"
                     />
 
@@ -91,6 +91,10 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import { ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/20/solid'
+
+const props = defineProps({
+    placeholder: String,
+})
 
 const filters = reactive({
     towns: ref(''),

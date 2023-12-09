@@ -14,9 +14,9 @@
             </div>
 
             <div class="col-span-6">
-                <label class="label">City</label>
-                <input v-model="form.city" type="text" class="input" required />
-                <ErrorMessage :error="form.errors.city" />
+                <label class="label">Miejscowość</label>
+                <TownSearch @selected-town="form.town_id = $event.id" />
+                <ErrorMessage :error="form.errors.town_id" />
             </div>
 
             <div class="col-span-6">
@@ -29,6 +29,7 @@
                 </select>
             </div>
 
+
             <div class="col-span-6">
                 <button type="submit" class="btn-primary">Create</button>
             </div>
@@ -39,6 +40,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3'
 import ErrorMessage from '@/Components/ErrorMessage.vue'
+import TownSearch from '@/Components/TownSearch.vue'
 
 defineProps({
     categories: Object,
@@ -47,8 +49,8 @@ defineProps({
 const form = useForm({
     name: '',
     description: '',
-    city: '',
     category_id: '',
+    town_id: '',
 })
 
 const create = () => form.post(route('user.listing.store'))

@@ -77,13 +77,17 @@ class UserListingController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'town_id' => 'Pole miasto jest wymagane',
+        ];
+
         $listing = $request->user()->listings()->create(
             $request->validate([
                 'name' => 'required|string',
                 'description' => 'required|string',
-                'city' => 'required|string',
                 'category_id' => 'required',
-            ]),
+                'town_id' => 'required',
+            ], $messages),
         );
 
         // $category = Category::find($request->category);
@@ -107,12 +111,16 @@ class UserListingController extends Controller
 
     public function update(Request $request, Listing $listing)
     {
+        $messages = [
+            'town_id' => 'Pole miasto jest wymagane',
+        ];
+
         $listing->update(
             $request->validate([
                 'name' => 'required|string',
                 'description' => 'required|string',
-                'city' => 'required|string',
-            ]),
+                'town_id' => 'required',
+            ], $messages),
         );
 
         return redirect()->route('user.listing.index')

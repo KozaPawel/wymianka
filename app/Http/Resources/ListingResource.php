@@ -24,7 +24,6 @@ class ListingResource extends JsonResource
             'town_name' => $this->town->name,
             'name' => $this->name,
             'description' => $this->description,
-            'city' => $this->city,
             'images' => ListingImageResource::collection($this->images),
             'images_count' => $this->whenNotNull($this->images_count),
             'offers_count' => $this->whenNotNull($this->offers_count),

@@ -9,6 +9,10 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $this->call([
+            TownSeeder::class,
+        ]);
+
         \App\Models\User::factory()->create([
             'name' => 'Test1',
             'email' => 'test@example.com',

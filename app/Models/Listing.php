@@ -16,8 +16,8 @@ class Listing extends Model
     protected $fillable = [
         'name',
         'description',
-        'city',
         'category_id',
+        'town_id',
     ];
 
     protected $sortable = [
