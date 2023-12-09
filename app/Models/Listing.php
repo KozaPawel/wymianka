@@ -16,8 +16,8 @@ class Listing extends Model
     protected $fillable = [
         'name',
         'description',
-        'city',
         'category_id',
+        'town_id',
     ];
 
     protected $sortable = [
@@ -38,6 +38,14 @@ class Listing extends Model
         return $this->belongsTo(
             Category::class,
             'category_id'
+        );
+    }
+
+    public function town(): BelongsTo
+    {
+        return $this->belongsTo(
+            Town::class,
+            'town_id'
         );
     }
 
@@ -88,6 +96,9 @@ class Listing extends Model
                 $filters['categories'] ?? $query,
                 fn ($query, $value) => empty($filters['categories']) ? $query :
                 $query->whereIn('category_id', $filters['categories'])
+            )->when(
+                $filters['town'] ?? false,
+                fn ($query, $value) => $query->where('town_id', $value)
             );
     }
 }

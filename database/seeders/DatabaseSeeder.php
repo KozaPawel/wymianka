@@ -9,7 +9,9 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            TownSeeder::class,
+        ]);
 
         \App\Models\User::factory()->create([
             'name' => 'Test1',
@@ -25,6 +27,5 @@ class DatabaseSeeder extends Seeder
         \App\Models\Category::factory(3)->create();
 
         \App\Models\Listing::factory(20)->create();
-
     }
 }

@@ -14,9 +14,9 @@
             </div>
 
             <div class="col-span-6">
-                <label class="label">City</label>
-                <input v-model="form.city" type="text" class="input" />
-                <ErrorMessage :error="form.errors.city" />
+                <label class="label">Miejscowość</label>
+                <TownSearch :placeholder="townName" @selected-town="$event.id ? form.town_id = $event.id : form.town_id = townId" />
+                <ErrorMessage :error="form.errors.town_id" />
             </div>
 
             <div class="col-span-6">
@@ -29,15 +29,20 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3'
 import ErrorMessage from '@/Components/ErrorMessage.vue'
+import TownSearch from '@/Components/TownSearch.vue'
 
 const props = defineProps({
     listing: Object,
 })
 
+const townName = props.listing.town_name
+
+const townId = props.listing.town_id
+
 const form = useForm({
     name: props.listing.name,
     description: props.listing.description,
-    city: props.listing.city,
+    town_id: props.listing.town_id,
 })
 
 const update = () => form.put(route('user.listing.update', {listing: props.listing.id}))

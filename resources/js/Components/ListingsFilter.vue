@@ -47,6 +47,10 @@ const searchValue = computed(
     () => page.props.filters.search,
 )
 
+const townValue = computed(
+    () => page.props.filters.town,
+)
+
 const props = defineProps({
     filters: Object,
     categories: Object,
@@ -55,6 +59,7 @@ const props = defineProps({
 const filterForm = reactive({
     search: searchValue,
     categories: props.filters.categories ?? [],
+    town: townValue,
 })
 
 const filter = () => {

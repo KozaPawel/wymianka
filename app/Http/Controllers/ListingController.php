@@ -21,6 +21,7 @@ class ListingController extends Controller
         $filters = $request->only([
             'search',
             'categories',
+            'town',
         ]);
 
         $listings = Listing::mostRecent()
