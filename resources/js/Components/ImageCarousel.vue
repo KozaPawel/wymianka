@@ -11,17 +11,17 @@
                     leave-from="opacity-100 scale-100"
                     leave-to="opacity-0 scale-95"
                 >
-                    <DialogPanel class="w-full h-full bg-light-background p-14 ">
+                    <DialogPanel class="w-full h-full bg-light-background md:p-14">
                         <DialogTitle>
-                            <button type="button" @click="closeModal">
+                            <button type="button" class="mt-14 ml-14 md:mt-0 md:ml-0" @click="closeModal">
                                 <XMarkIcon class="h-8 w-8 hover:cursor-pointer" />
                             </button>
                         </DialogTitle>
 
-                        <Carousel v-if="numberOfImages">
+                        <Carousel v-if="numberOfImages > 1">
                             <Slide v-for="image in props.images" :key="image.id">
                                 <div>
-                                    <img :src="image.source" class="object-scale-down w-fit h-[43rem] hover:cursor-pointer" />
+                                    <img :src="image.source" class="carousel-image hover:cursor-pointer" />
                                 </div>
                             </Slide>
                 
@@ -35,16 +35,20 @@
                                 />
                             </template>
                         </Carousel>
+
+                        <div v-else-if="numberOfImages === 1" class="flex justify-center" @click="openModal">
+                            <img :src="props.images[0].source" class="carousel-image" />
+                        </div>
                     </DialogPanel>
                 </TransitionChild>
             </div>
         </Dialog>
     </TransitionRoot>
 
-    <Carousel v-if="numberOfImages">
+    <Carousel v-if="numberOfImages > 1">
         <Slide v-for="image in props.images" :key="image.id" class="h-96 w-fit hover:cursor-pointer">
             <div @click="openModal">
-                <img :src="image.source" class="h-96 w-fit" />
+                <img :src="image.source" class="h-96 w-fit object-contain" />
             </div>
         </Slide>
                 
@@ -56,7 +60,11 @@
             <Pagination v-if="numberOfImages > 1" />
         </template>
     </Carousel>
-            
+
+    <div v-else-if="numberOfImages === 1" class="flex justify-center" @click="openModal">
+        <img :src="props.images[0].source" class="h-96 w-fit object-contain hover:cursor-pointer" />
+    </div>
+    
     <div v-else class="w-full text-center font-medium">
         Brak zdjęć
     </div>
