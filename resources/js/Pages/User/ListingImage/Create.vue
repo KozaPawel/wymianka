@@ -1,4 +1,6 @@
 <template>
+    <BackButton />
+    
     <Box v-if="listing.images.length < 6">
         <template #header>
             Prześlij nowe zdjęcia 
@@ -52,6 +54,7 @@ import { useForm, router } from '@inertiajs/vue3'
 import NProgress from 'nprogress'
 import Box from '@/Components/UI/Box.vue'
 import ErrorMessage from '@/Components/ErrorMessage.vue'
+import BackButton from '@/Components/BackButton.vue'
 
 const props = defineProps({
     listing: Object,

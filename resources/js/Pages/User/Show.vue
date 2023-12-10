@@ -1,7 +1,5 @@
 <template>
-    <div class="mb-4">
-        <Link :href="route('user.listing.index')">Wróć</Link>
-    </div>
+    <BackButton />
 
     <h1 class="text-3xl mb-4 font-medium">Ofery wymiany</h1>
     <section class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
@@ -31,11 +29,10 @@
 
 <script setup>
 import { computed } from 'vue'
-import { Link } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import ListingDetails from '@/Components/ListingDetails.vue'
 import Offer from '@/Components/Offer.vue'
-
+import BackButton from '@/Components/BackButton.vue'
 const props = defineProps({
     listing: Object,
 })
