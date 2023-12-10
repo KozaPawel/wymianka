@@ -1,4 +1,6 @@
 <template>
+    <BackButton />
+
     <form @submit.prevent="update">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6">
@@ -30,6 +32,7 @@
 import { useForm } from '@inertiajs/vue3'
 import ErrorMessage from '@/Components/ErrorMessage.vue'
 import TownSearch from '@/Components/TownSearch.vue'
+import BackButton from '@/Components/BackButton.vue'
 
 const props = defineProps({
     listing: Object,
