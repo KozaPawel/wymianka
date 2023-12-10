@@ -28,6 +28,7 @@ class ListingResource extends JsonResource
             'images_count' => $this->whenNotNull($this->images_count),
             'offers_count' => $this->whenNotNull($this->offers_count),
             'traded_at' => $this->whenNotNull($this->traded_at),
+            'deleted_at' => $this->whenNotNull($this->deleted_at),
         ];
     }
 }
