@@ -71,4 +71,7 @@
     .carousel-arrow {
         @apply box-content bg-light-background border border-solid border-gray-200 rounded-md text-light-text
     }
+    .carousel-image {
+        @apply object-scale-down w-fit h-full mt-10 md:mt-0 md:h-[43rem]
+    }
 }
