@@ -15,7 +15,7 @@
                 <p class="break-all">{{ category.name }}</p>
             </Box>
             <MakeOffer 
-                v-if="(user && user.id != props.listing.user_id) && !offer" 
+                v-if="(user && user.id != props.listing.user.id) && !offer" 
                 :user-listings="userListings" 
                 :listing-id="props.listing.id"
             />

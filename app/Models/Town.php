@@ -33,11 +33,6 @@ class Town extends Model
         );
     }
 
-    public function scopeMostRecent(Builder $query): Builder
-    {
-        return $query->latest();
-    }
-
     public function scopeFilter(Builder $query, array $filters): Builder
     {
         return $query
