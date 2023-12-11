@@ -14,11 +14,11 @@
                         Wymieniono
                     </div>
                     <div class="xl:flex items-center gap-2">
-                        <ListingDetails :listing="listing" />
+                        <ListingDetails :listing="listing" class="!pl-0 !pt-0 md:!pl-4 md:!pt-3" />
                     </div>
                 </div>
                 <section>
-                    <div class="mt-2">
+                    <div>
                         <Link 
                             v-if="!listing.timestamps.deleted_at"
                             :href="route('user.listing.image.create', {listing: listing.id})" 
@@ -64,7 +64,7 @@
 
                         <Link
                             v-else 
-                            class="btn-accent"
+                            class="btn-accent w-full"
                             :href="route('user.listing.restore', {listing: listing.id})"
                             as="button" method="put"
                         >

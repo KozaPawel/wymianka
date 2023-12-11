@@ -11,11 +11,11 @@
         <p class="text-md ">
             Przez {{ props.listing.user.name }}
         </p>
-
-        <p class="font-medium text-xl mt-2">
-            {{ props.listing.name }}
-        </p>
     </div>
+
+    <p class="font-semibold text-3xl mt-2">
+        {{ props.listing.name }}
+    </p>
 
     <div class="mt-4">
         <p class="text-2xl font-medium">Opis</p>
