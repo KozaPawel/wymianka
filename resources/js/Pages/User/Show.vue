@@ -1,7 +1,7 @@
 <template>
     <BackButton />
 
-    <h1 class="text-3xl mb-4 font-medium">Ofery wymiany</h1>
+    <h1 class="page-title mb-4">Ofery wymiany</h1>
     <section class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
         <div class="flex flex-col items-start md:col-span-7 gap-2">
             <Box v-if="!hasOffers" class="w-full text-center font-medium text-gray-500">

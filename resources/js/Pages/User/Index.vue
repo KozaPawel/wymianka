@@ -1,5 +1,5 @@
 <template>
-    <h1 class="text-3xl mb-4 font-medium">Twoje ogłoszenia</h1>
+    <h1 class="page-title">Twoje ogłoszenia</h1>
     <section class="mb-4">
         <UserListingsFilter :filters="filters" />
     </section>
@@ -18,17 +18,37 @@
                     </div>
                 </div>
                 <section>
-                    <div class="flex items-center gap-1">
+                    <div class="mt-2">
+                        <Link 
+                            v-if="!listing.timestamps.deleted_at"
+                            :href="route('user.listing.image.create', {listing: listing.id})" 
+                            class="block w-full btn-accent text-center"
+                        >
+                            Zdjęcia ({{ listing.images_count }})
+                        </Link>
+                    </div>
+                    
+                    <div class="mt-2">
+                        <Link 
+                            v-if="!listing.timestamps.deleted_at"
+                            :href="route('user.listing.show', {listing: listing.id})" 
+                            class="block w-full btn-accent text-center"
+                        >
+                            Oferty wymiany ({{ listing.offers_count }})
+                        </Link>
+                    </div>
+
+                    <div class="flex flex-row justify-between items-center gap-1 mt-2">
                         <Link 
                             v-if="!listing.timestamps.deleted_at" 
-                            class="btn-accent" 
+                            class="btn-accent w-full text-center" 
                             :href="route('listing.show', {listing: listing.id})"
                         >
                             Wyświetl
                         </Link>
                         <Link 
                             v-if="!listing.timestamps.deleted_at" 
-                            class="btn-accent" 
+                            class="btn-accent w-full text-center" 
                             :href="route('user.listing.edit', {listing: listing.id})"
                         >
                             Edytuj
@@ -36,7 +56,7 @@
 
                         <button 
                             v-if="!listing.timestamps.deleted_at" 
-                            class="btn-danger" 
+                            class="btn-danger w-full" 
                             @click.once="deleteListing(listing)"
                         >
                             Usuń
@@ -51,25 +71,6 @@
                             Przywróć
                         </Link>
                     </div>
-
-                    <div class="mt-2">
-                        <Link 
-                            v-if="!listing.timestamps.deleted_at"
-                            :href="route('user.listing.image.create', {listing: listing.id})" 
-                            class="block w-full btn-accent text-center"
-                        >
-                            Zdjęcia ({{ listing.images_count }})
-                        </Link>
-                    </div>
-                    <div class="mt-2">
-                        <Link 
-                            v-if="!listing.timestamps.deleted_at"
-                            :href="route('user.listing.show', {listing: listing.id})" 
-                            class="block w-full btn-accent text-center"
-                        >
-                            Oferty wymiany ({{ listing.offers_count }})
-                        </Link>
-                    </div>
                 </section>
             </div>
         </Box>
@@ -79,7 +80,7 @@
         </div>
     </section>
 
-    <section v-if="listings.data.length != 0" class="w-full flex justify-center my-6">
+    <section v-if="listings.meta.last_page !== 1" class="w-full flex justify-center my-6">
         <Pagination :links="listings.meta.links" :prev-page-url="listings.links.prev" :next-page-url="listings.links.next" />
     </section>
 </template>

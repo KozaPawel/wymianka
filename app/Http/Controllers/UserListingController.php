@@ -79,7 +79,7 @@ class UserListingController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'town_id' => 'Pole miasto jest wymagane',
+            'town_id' => 'Pole miejscowość jest wymagane',
         ];
 
         $listing = $request->user()->listings()->create(

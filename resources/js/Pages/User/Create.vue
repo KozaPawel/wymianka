@@ -15,13 +15,13 @@
 
             <div class="col-span-6">
                 <label class="label">Miejscowość</label>
-                <TownSearch @selected-town="form.town_id = $event.id" />
+                <TownSearch class="townsearch-border" @selected-town="form.town_id = $event.id" />
                 <ErrorMessage :error="form.errors.town_id" />
             </div>
 
             <div class="col-span-6">
                 <label class="label">Kategoria</label>
-                <select v-model="form.category_id" required class="input lg:w-1/4">
+                <select v-model="form.category_id" required class="select lg:w-1/4" :class="{'text-gray-600': form.category_id === ''}">
                     <option disabled value="">Wybierz kategorię</option>
                     <option v-for="category in categories" :key="category.id" :value="category.id">
                         {{ category.name }}
@@ -31,7 +31,9 @@
 
 
             <div class="col-span-6">
-                <button type="submit" class="btn-primary">Create</button>
+                <button type="submit" class="btn-primary">
+                    Dodaj ogłoszenie
+                </button>
             </div>
         </div>
     </form>

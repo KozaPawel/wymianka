@@ -11,8 +11,8 @@
     :root {
         /* #295e11 */
         --text: #0f100f;
-        --background: #f2f3f2;
-        --background-200: #f6f7f6;
+        --background: #FBFCFF;
+        --background-200: #fefefe;
         --primary: #4b8d2c;
         /* #3f7d23 800
         #4b8d2c 700
@@ -28,24 +28,23 @@
         --hover: #3f7d23;
         --hover-gray: #D8DBDC;
         --danger: #d43f37;
+        --focus: #61ae3f;
       }
 }
 
 @layer components {
     .box {
-        @apply border border-gray-200 bg-light-background-200 rounded-md shadow-sm p-4
+        @apply bg-light-background-200 rounded-md shadow-md shadow-gray-200 p-4
     }
     .label {
-        @apply block mb-1 hover:cursor-text;
+        @apply block mb-1 hover:cursor-text
     }
     .input {
-        @apply block w-full p-2 rounded-md shadow-sm border border-gray-400 transition duration-200 ease-in
-            bg-light-background-200 focus:outline-none focus:ring-0;
+        @apply block w-full p-2 rounded-md shadow-sm transition duration-200 ease-in border border-gray-300 h-10 pl-3
+            bg-light-accent placeholder-gray-600 focus:outline-none focus:border-light-focus focus:ring-1 focus:ring-light-focus
     }
-
-    /* focus:outline-none focus:border-[#61ae3f] focus:ring-1 focus:ring-[#61ae3f] */
     .input-checkbox {
-        @apply h-4 w-4 rounded border-gray-300 text-light-primary hover:cursor-pointer hover:border-light-primary focus:ring-offset-0 focus:ring-transparent
+        @apply h-4 w-4 rounded border-light-hover-gray text-light-primary hover:cursor-pointer hover:border-light-primary focus:ring-offset-0 focus:ring-transparent
     }
     .input-error {
         @apply text-red-600 text-sm
@@ -63,7 +62,7 @@
         @apply p-2 rounded-md border shadow-sm border-gray-300 hover:border-gray-400
     }
     .btn-danger {
-        @apply btn-accent text-light-danger hover:bg-light-danger hover:text-white
+        @apply btn-accent text-light-danger hover:bg-light-danger hover:text-light-background
     }
     .menu-icon {
         @apply mr-2 ml-1 h-5 w-5
@@ -77,7 +76,16 @@
     .carousel-image {
         @apply object-scale-down w-fit h-full mt-10 md:mt-0 md:h-[43rem]
     }
-    /* .page-title {
-        @apply 
-    } */
+    .page-title {
+        @apply font-bold text-3xl mb-2 break-words w-full
+    }
+    .combobox-focus {
+        @apply transition duration-200 ease-in focus-within:border-light-focus focus-within:ring-2 focus-within:ring-light-focus
+    }
+    .select {
+        @apply input hover:cursor-pointer
+    }
+    .townsearch-border {
+        @apply border border-gray-300 rounded-md
+    }
 }

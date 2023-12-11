@@ -18,6 +18,7 @@ export default {
           'hover': 'var(--hover)',
           'hover-gray': 'var(--hover-gray)',
           'danger': 'var(--danger)',
+          'focus': 'var(--focus)',
         },
       },
     },

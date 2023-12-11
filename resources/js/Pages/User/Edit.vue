@@ -17,12 +17,14 @@
 
             <div class="col-span-6">
                 <label class="label">Miejscowość</label>
-                <TownSearch :placeholder="townName" @selected-town="$event.id ? form.town_id = $event.id : form.town_id = townId" />
+                <TownSearch class="townsearch-border" :placeholder="townName" @selected-town="$event.id ? form.town_id = $event.id : form.town_id = townId" />
                 <ErrorMessage :error="form.errors.town_id" />
             </div>
 
             <div class="col-span-6">
-                <button type="submit" class="btn-primary">Update</button>
+                <button type="submit" class="btn-primary">
+                    Zaktualizuj ogłoszenie
+                </button>
             </div>
         </div>
     </form>

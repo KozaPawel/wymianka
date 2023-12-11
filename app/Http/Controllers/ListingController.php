@@ -45,14 +45,9 @@ class ListingController extends Controller
         $offer = ! Auth::user() ? null :
             $listing->offers()->myOffer()->first();
 
-        $filters = [
-            'categories' => $listing->category()->pluck('id'),
-        ];
-
         $userListings = ! Auth::user() ? null :
             Auth::user()
                 ->listings()
-                ->filter($filters)
                 ->get();
 
         return inertia(
