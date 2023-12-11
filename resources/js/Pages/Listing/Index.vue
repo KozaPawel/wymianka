@@ -11,8 +11,11 @@
                 <span v-if="isSearching"> > {{ page.props.filters.search }} </span>
             </p>
         </div>
+
         <form class="group flex flex-col gap-2 md:gap-1 md:flex-row items-center justify-end w-full md:w-1/2 lg:w-3/4 col-span-12" @submit.prevent="search">
-            <div class="flex flex-row items-center justify-end w-full md:w-1/3">
+            <div class="flex flex-row items-center justify-end w-full md:w-1/3 gap-1">
+                <SearchingTip />
+                
                 <input 
                     v-model="filterForm.search" 
                     type="text" 
@@ -43,7 +46,7 @@
                         <Link :href="route('listing.show', {listing: listing.id})">
                             <img v-if="listing.images.length" :src="listing.images[0].source" class="aspect-square h-full w-full object-cover rounded-t-md" />
                             <NoPhotos v-else class="aspect-square" />
-                            <ListingDetails :listing="listing" />
+                            <ListingDetailsShort :listing="listing" />
                         </Link>
                     </div>
                 </Box>
@@ -62,12 +65,13 @@
 import { computed, reactive } from 'vue'
 import { Link, router, usePage } from '@inertiajs/vue3'
 import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
-import ListingDetails from '@/Components/ListingDetails.vue'
+import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import Box from '@/Components/UI/Box.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 import ListingsFilter from '@/Components/ListingsFilter.vue'
 import TownSearch from '@/Components/TownSearch.vue'
 import NoPhotos from '@/Components/NoPhotos.vue'
+import SearchingTip from '@/Components/SearchingTip.vue'
 
 const props = defineProps({
     listings: Object,

@@ -4,13 +4,13 @@
     <form @submit.prevent="update">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6">
-                <label class="label">Name</label>
+                <label class="label">Tytuł ogłoszenia</label>
                 <input v-model="form.name" type="text" class="input" />
                 <ErrorMessage :error="form.errors.name" />
             </div>
 
             <div class="col-span-6">
-                <label class="label">Description</label>
+                <label class="label">Opis</label>
                 <input v-model="form.description" type="text" class="input" />
                 <ErrorMessage :error="form.errors.description" />
             </div>
@@ -40,14 +40,14 @@ const props = defineProps({
     listing: Object,
 })
 
-const townName = props.listing.town_name
+const townName = props.listing.town.name
 
-const townId = props.listing.town_id
+const townId = props.listing.town.id
 
 const form = useForm({
     name: props.listing.name,
     description: props.listing.description,
-    town_id: props.listing.town_id,
+    town_id: props.listing.town.id,
 })
 
 const update = () => form.put(route('user.listing.update', {listing: props.listing.id}))

@@ -80,21 +80,22 @@ class UserListingController extends Controller
     {
         $messages = [
             'town_id' => 'Pole miejscowość jest wymagane',
+            'description.min' => 'Wymagane jest minimum 50 znaków',
         ];
 
-        $listing = $request->user()->listings()->create(
-            $request->validate([
-                'name' => 'required|string',
-                'description' => 'required|string',
-                'category_id' => 'required',
-                'town_id' => 'required',
-            ], $messages),
-        );
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string|min:50',
+            'category_id' => 'required',
+            'town_id' => 'required',
+        ], $messages);
+
+        $validatedData['name'] = ucfirst(strtolower($validatedData['name']));
+
+        $request->user()->listings()->create($validatedData);
 
         // $category = Category::find($request->category);
-
         // $listing->categories()->associate($category);
-
         return redirect()->route('user.listing.index')
             ->with('success', 'Stworzono nowe ogłoszenie');
     }
@@ -114,12 +115,13 @@ class UserListingController extends Controller
     {
         $messages = [
             'town_id' => 'Pole miasto jest wymagane',
+            'description.min' => 'Wymagane jest minimum 50 znaków',
         ];
 
         $listing->update(
             $request->validate([
                 'name' => 'required|string',
-                'description' => 'required|string',
+                'description' => 'required|string|min:50',
                 'town_id' => 'required',
             ], $messages),
         );

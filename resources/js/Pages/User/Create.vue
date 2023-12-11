@@ -2,7 +2,7 @@
     <form @submit.prevent="create">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6">
-                <label class="label">Nazwa</label>
+                <label class="label">Tytuł ogłoszenia</label>
                 <input v-model="form.name" type="text" class="input" required />
                 <ErrorMessage :error="form.errors.name" />
             </div>
