@@ -3,13 +3,13 @@
         <Combobox v-model="selectedTown">
             <div class="relative">
                 <div
-                    class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-sm  sm:text-sm"
+                    class="relative w-full cursor-default overflow-hidden rounded-lg bg-light-accent text-left shadow-sm sm:text-sm combobox-focus"
                 >
                     <ComboboxInput
                         :display-value="(town) => `${town.name ? town.name + ',' : ''} ${town.county ? town.county + ',': ''} ${town.province ? town.province : ''}`.trim()"
-                        class="input w-full bg-white border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0 "
+                        class="input w-full bg-light-accent border-none py-2 pl-3 pr-10 text-md leading-5"
                         autocomplete="off"
-                        :placeholder="props.placeholder ? props.placeholder : 'Wyszukaj miasto'"
+                        :placeholder="props.placeholder ? props.placeholder : 'Wyszukaj miejscowość'"
                         @change="handleInputChange"
                     />
 
@@ -37,7 +37,7 @@
                     @after-leave="query = ''"
                 >
                     <ComboboxOptions
-                        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-background py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
                     >
                         <div
                             v-if="towns.length === 0 && filters.towns !== ''"
@@ -80,6 +80,7 @@
 
 <script setup>
 import { ref, watch, reactive } from 'vue'
+import { usePage } from '@inertiajs/vue3'
 import axios from 'axios'
 import { debounce } from 'lodash'
 import {
@@ -91,6 +92,8 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import { ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/20/solid'
+
+const page = usePage()
 
 const props = defineProps({
     placeholder: String,

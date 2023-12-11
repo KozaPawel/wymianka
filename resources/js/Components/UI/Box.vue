@@ -1,6 +1,6 @@
 <template>
     <div class="box">
-        <div class="text-gray-500 font-medium">
+        <div class="font-medium text-lg">
             <slot name="header" />
         </div>
         <slot />

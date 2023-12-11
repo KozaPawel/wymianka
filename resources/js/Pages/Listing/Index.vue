@@ -1,6 +1,6 @@
 <template>
     <div class="h-full w-full flex flex-col md:flex-row md:justify-between mb-2">
-        <div class="font-bold text-3xl mb-2 break-words w-full">
+        <div class="page-title">
             <p>
                 <Link 
                     :href="route('listing.index')" 
@@ -11,23 +11,25 @@
                 <span v-if="isSearching"> > {{ page.props.filters.search }} </span>
             </p>
         </div>
-        <form class="flex flex-col gap-1 md:flex-row items-center justify-end w-full md:w-1/2 lg:w-3/4 col-span-12" @submit.prevent="search">
-            <div class="flex flex-row items-center justify-end w-full">
+        <form class="group flex flex-col gap-2 md:gap-1 md:flex-row items-center justify-end w-full md:w-1/2 lg:w-3/4 col-span-12" @submit.prevent="search">
+            <div class="flex flex-row items-center justify-end w-full md:w-1/3">
                 <input 
                     v-model="filterForm.search" 
                     type="text" 
                     placeholder="Wyszukaj" 
-                    class="input text-sm border-none bg-white lg:w-1/3"
+                    class="input text-md border border-transparent w-full"
                 />
             </div>
 
-            <TownSearch @selected-town="filterForm.town = $event.id" />
+            <div class="flex flex-row gap-2 md:gap-1 w-full md:w-1/2">
+                <TownSearch @selected-town="filterForm.town = $event.id" />
             
-            <button type="submit" class="btn-accent p-0">
-                <div class="h-9 w-9 flex items-center justify-center">
-                    <MagnifyingGlassIcon class="h-6" />
-                </div>
-            </button>
+                <button type="submit" class="btn-accent p-0">
+                    <div class="h-9 w-9 flex items-center justify-center">
+                        <MagnifyingGlassIcon class="h-6" />
+                    </div>
+                </button>
+            </div>
         </form>
     </div>
 
@@ -51,7 +53,7 @@
             </div>
         </div>
     </div>
-    <div v-if="props.listings.data.length" class="w-full flex justify-center mt-4 mb-4">
+    <div v-if="props.listings.meta.last_page !== 1" class="w-full flex justify-center mt-4 mb-4">
         <Pagination :links="props.listings.meta.links" :prev-page-url="props.listings.links.prev" :next-page-url="props.listings.links.next" />
     </div>
 </template>
