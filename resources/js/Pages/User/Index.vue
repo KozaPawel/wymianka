@@ -18,29 +18,33 @@
                     </div>
                 </div>
                 <section>
-                    <div class="flex items-center gap-1 text-gray-600">
+                    <div class="flex items-center gap-1">
                         <Link 
                             v-if="!listing.deleted_at" 
-                            class="btn-outline" 
+                            class="btn-accent" 
                             :href="route('listing.show', {listing: listing.id})"
                         >
                             Wyświetl
                         </Link>
                         <Link 
                             v-if="!listing.deleted_at" 
-                            class="btn-outline" 
+                            class="btn-accent" 
                             :href="route('user.listing.edit', {listing: listing.id})"
                         >
                             Edytuj
                         </Link>
 
-                        <button v-if="!listing.deleted_at" class="btn-outline" @click.once="deleteListing(listing)">
+                        <button 
+                            v-if="!listing.deleted_at" 
+                            class="btn-danger" 
+                            @click.once="deleteListing(listing)"
+                        >
                             Usuń
                         </button>
 
                         <Link
                             v-else 
-                            class="btn-outline"
+                            class="btn-accent"
                             :href="route('user.listing.restore', {listing: listing.id})"
                             as="button" method="put"
                         >
@@ -52,7 +56,7 @@
                         <Link 
                             v-if="!listing.deleted_at"
                             :href="route('user.listing.image.create', {listing: listing.id})" 
-                            class="block w-full btn-outline text-gray-600 text-center"
+                            class="block w-full btn-accent text-center"
                         >
                             Zdjęcia ({{ listing.images_count }})
                         </Link>
@@ -61,7 +65,7 @@
                         <Link 
                             v-if="!listing.deleted_at"
                             :href="route('user.listing.show', {listing: listing.id})" 
-                            class="block w-full btn-outline text-gray-600 text-center"
+                            class="block w-full btn-accent text-center"
                         >
                             Oferty wymiany ({{ listing.offers_count }})
                         </Link>

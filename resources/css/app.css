@@ -27,13 +27,13 @@
         --accent: #E8EAEB;
         --hover: #3f7d23;
         --hover-gray: #D8DBDC;
-
+        --danger: #d43f37;
       }
 }
 
 @layer components {
     .box {
-        @apply border border-gray-200 bg-light-background-200 rounded-md p-4 shadow-sm
+        @apply border border-gray-200 bg-light-background-200 rounded-md shadow-sm p-4
     }
     .label {
         @apply block mb-1 hover:cursor-text;
@@ -48,19 +48,22 @@
         @apply h-4 w-4 rounded border-gray-300 text-light-primary hover:cursor-pointer hover:border-light-primary focus:ring-offset-0 focus:ring-transparent
     }
     .input-error {
-        @apply text-red-600 text-sm;
+        @apply text-red-600 text-sm
     }
     .btn-primary {
-        @apply bg-light-primary text-white font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover;
+        @apply bg-light-primary text-white font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover
     }
     .btn-accent {
-        @apply bg-light-accent font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray;
+        @apply bg-light-accent font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray
     }
     .text-accent {
         @apply text-light-text font-medium p-2 rounded-lg transition-colors duration-200 ease-in-out hover:bg-light-hover-gray
     }
     .btn-outline {
         @apply p-2 rounded-md border shadow-sm border-gray-300 hover:border-gray-400
+    }
+    .btn-danger {
+        @apply btn-accent text-light-danger hover:bg-light-danger hover:text-white
     }
     .menu-icon {
         @apply mr-2 ml-1 h-5 w-5
@@ -69,9 +72,12 @@
         @apply flex w-full items-center font-normal text-sm rounded-md px-2 py-2 hover:bg-light-hover-gray
     }
     .carousel-arrow {
-        @apply box-content bg-light-background border border-solid border-gray-200 rounded-md text-light-text
+        @apply box-content bg-light-background border border-solid border-gray-200 rounded-full text-light-text
     }
     .carousel-image {
         @apply object-scale-down w-fit h-full mt-10 md:mt-0 md:h-[43rem]
     }
+    /* .page-title {
+        @apply 
+    } */
 }

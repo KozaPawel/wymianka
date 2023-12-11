@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-12 gap-4">
-        <Box class="col-span-12 md:col-span-7 w-full">
+        <Box class="h-fit p-4 col-span-12 md:col-span-7 w-full">
             <ImageCarousel :images="props.listing.images" />
         </Box>
 

@@ -35,17 +35,14 @@
         <ListingsFilter :categories="props.categories" :filters="props.filters" class="col-span-12 lg:col-span-2" />
 
         <div class="col-span-12 lg:col-span-10">
-            <div v-if="props.listings.data.length" class="grid grid-cols-2 xl:grid-cols-3 gap-4">
-                <Box v-for="listing in props.listings.data" :key="listing.id">
+            <div v-if="props.listings.data.length" class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4">
+                <Box v-for="listing in props.listings.data" :key="listing.id" class="p-0 overflow-hidden">
                     <div>
                         <Link :href="route('listing.show', {listing: listing.id})">
-                            <ListingDetails :listing="listing" class="text-md" />
+                            <img v-if="listing.images.length" :src="listing.images[0].source" class="aspect-square h-full w-full object-cover rounded-t-md" />
+                            <NoPhotos v-else class="aspect-square" />
+                            <ListingDetails :listing="listing" />
                         </Link>
-                        <p class="break-all">
-                            Kategoria: {{ listing.category_name }}
-                            <br />
-                            Miasto: {{ listing.town_name }}
-                        </p>
                     </div>
                 </Box>
             </div>
@@ -62,12 +59,13 @@
 <script setup>
 import { computed, reactive } from 'vue'
 import { Link, router, usePage } from '@inertiajs/vue3'
+import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
 import ListingDetails from '@/Components/ListingDetails.vue'
 import Box from '@/Components/UI/Box.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 import ListingsFilter from '@/Components/ListingsFilter.vue'
 import TownSearch from '@/Components/TownSearch.vue'
-import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+import NoPhotos from '@/Components/NoPhotos.vue'
 
 const props = defineProps({
     listings: Object,
