@@ -1,6 +1,6 @@
 <template>
     <Link :href="route('user.listing.index')">
-        <div class="flex flex-row items-center gap-1 -ml-1 mb-4">
+        <div class="flex flex-row items-center gap-1 -ml-1 mb-4 text-accent !p-1 !pr-2 w-fit">
             <ArrowSmallLeftIcon class="h-8 w-8" />
             <span class="font-medium text-md">Profil</span>
         </div>

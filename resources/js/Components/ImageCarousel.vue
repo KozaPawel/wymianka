@@ -65,9 +65,7 @@
         <img :src="props.images[0].source" class="h-96 w-fit object-contain hover:cursor-pointer" />
     </div>
     
-    <div v-else class="w-full text-center font-medium">
-        Brak zdjęć
-    </div>
+    <NoPhotos v-else />
 </template>
 
 <script setup>
@@ -82,6 +80,7 @@ import {
     DialogTitle,
 } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/20/solid'
+import NoPhotos from './NoPhotos.vue'
 
 const props = defineProps({
     images: Object,
