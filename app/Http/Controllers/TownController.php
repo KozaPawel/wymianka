@@ -13,7 +13,7 @@ class TownController extends Controller
             'towns',
         ]);
 
-        $towns = Town::mostRecent()
+        $towns = Town::orderBy('search')
             ->filter($filters)
             ->paginate(20)
             ->take(20);

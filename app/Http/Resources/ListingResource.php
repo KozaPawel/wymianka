@@ -16,19 +16,31 @@ class ListingResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_id' => $this->user_id,
-            'user_name' => $this->owner->name,
-            'category_id' => $this->category_id,
-            'category_name' => $this->category->name,
-            'town_id' => $this->town_id,
-            'town_name' => $this->town->name,
             'name' => $this->name,
             'description' => $this->description,
             'images' => ListingImageResource::collection($this->images),
             'images_count' => $this->whenNotNull($this->images_count),
             'offers_count' => $this->whenNotNull($this->offers_count),
-            'traded_at' => $this->whenNotNull($this->traded_at),
-            'deleted_at' => $this->whenNotNull($this->deleted_at),
+            'user' => [
+                'id' => $this->user_id,
+                'name' => $this->owner->name,
+            ],
+            'category' => [
+                'id' => $this->category_id,
+                'name' => $this->category->name,
+            ],
+            'town' => [
+                'id' => $this->town_id,
+                'name' => $this->town->name,
+                'county' => $this->town->county,
+                'province' => $this->town->province,
+            ],
+            'timestamps' => [
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
+                'traded_at' => $this->whenNotNull($this->traded_at),
+                'deleted_at' => $this->whenNotNull($this->deleted_at),
+            ],
         ];
     }
 }

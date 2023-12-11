@@ -23,12 +23,13 @@ class UserListingController extends Controller
             ...$request->only(['by', 'order']),
         ];
 
-        $listings = Listing::mostRecent()
-            ->where('user_id', Auth::user()->id)
-            ->withCount('offers')
-            ->withCount('images')
+        $listings = Auth::user()
+            ->listings()
             ->filter($filters)
-            ->paginate(8)
+            ->mostRecent()
+            ->withCount('images')
+            ->withCount('offers')
+            ->paginate(6)
             ->withQueryString();
 
         return inertia(
