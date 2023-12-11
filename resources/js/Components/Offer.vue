@@ -19,7 +19,7 @@
                 <Link
                     v-if="!isOfferChosen"
                     :href="route('user.offer.accept', { offer: offer.id })" 
-                    class="btn-outline text-xs font-medium" 
+                    class="btn-accent" 
                     method="put"
                     as="button"
                 >

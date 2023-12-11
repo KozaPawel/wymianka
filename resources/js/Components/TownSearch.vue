@@ -6,7 +6,7 @@
                     class="relative w-full cursor-default overflow-hidden rounded-lg bg-light-accent text-left shadow-sm sm:text-sm combobox-focus"
                 >
                     <ComboboxInput
-                        :display-value="(town) => `${town.name ? town.name + ',' : ''} ${town.county ? town.county + ',': ''} ${town.province ? town.province : ''}`.trim()"
+                        :display-value="(town) => `${town.name ? town.name + ',' : ''}${town.county ? ' ' + town.county + ',': ''} ${town.province ? town.province : ''}`.trim()"
                         class="input w-full bg-light-accent border-none py-2 pl-3 pr-10 text-md leading-5"
                         autocomplete="off"
                         :placeholder="props.placeholder ? props.placeholder : 'Wyszukaj miejscowość'"
@@ -66,7 +66,7 @@
                                     class="break-words font-medium"
                                 >
                                     {{ town.name }},
-                                    powiat {{ town.county }},
+                                    {{ town.county ? 'powiat ' + town.county + ',': '' }}
                                     województwo {{ town.province }}
                                 </span>
                             </li>

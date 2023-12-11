@@ -6,13 +6,7 @@
 
         <div class="col-span-12 md:col-span-5 flex flex-col gap-4">
             <Box class="h-auto">
-                <template #header>
-                    Informacje: 
-                </template>
-                
-                <ListingDetails :listing="props.listing" />
-                
-                <p class="break-all">{{ category.name }}</p>
+                <ListingDetailsLong :listing="props.listing" />
             </Box>
             <MakeOffer 
                 v-if="(user && user.id != props.listing.user.id) && !offer" 
@@ -30,7 +24,7 @@
 <script setup>
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/vue3'
-import ListingDetails from '@/Components/ListingDetails.vue'
+import ListingDetailsLong from '@/Components/ListingDetailsLong.vue'
 import Box from '@/Components/UI/Box.vue'
 import MakeOffer from '@/Components/MakeOffer.vue'
 import Offer from '@/Components/Offer.vue'
