@@ -2,6 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Category;
+use App\Models\Town;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,22 +24,9 @@ class ListingResource extends JsonResource
             'images' => ListingImageResource::collection($this->images),
             'images_count' => $this->whenNotNull($this->images_count),
             'offers_count' => $this->whenNotNull($this->offers_count),
-            'user' => [
-                'id' => $this->user_id,
-                'name' => $this->owner->name,
-            ],
-            'category' => [
-                'id' => $this->category_id,
-                'name' => $this->category->name,
-            ],
-            'town' => [
-                'id' => $this->town_id,
-                'name' => $this->town->name,
-                'county' => $this->town->county,
-                'province' => $this->town->province,
-                'lat' => $this->town->lat,
-                'lon' => $this->town->lon,
-            ],
+            'user' => UserResource::make(User::find($this->user_id)),
+            'category' => CategoryResource::make(Category::find($this->category_id)),
+            'town' => TownResource::make(Town::find($this->town_id)),
             'timestamps' => [
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
