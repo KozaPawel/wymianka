@@ -29,6 +29,7 @@ import Box from '@/Components/UI/Box.vue'
 import MakeOffer from '@/Components/MakeOffer.vue'
 import Offer from '@/Components/Offer.vue'
 import ImageCarousel from '@/Components/ImageCarousel.vue'
+import { MapPinIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
     listing: Object,

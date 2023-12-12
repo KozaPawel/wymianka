@@ -43,7 +43,10 @@ class ListingController extends Controller
     public function show(Listing $listing)
     {
         $offer = ! Auth::user() ? null :
-            $listing->offers()->myOffer()->first();
+            $listing->offers()
+                ->myOffer()
+                ->where('rejected_at', null)
+                ->first();
 
         $userListings = ! Auth::user() ? null :
             Auth::user()

@@ -34,6 +34,8 @@ class ListingResource extends JsonResource
                 'name' => $this->town->name,
                 'county' => $this->town->county,
                 'province' => $this->town->province,
+                'lat' => $this->town->lat,
+                'lon' => $this->town->lon,
             ],
             'timestamps' => [
                 'created_at' => $this->created_at,
