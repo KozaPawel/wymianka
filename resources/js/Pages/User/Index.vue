@@ -9,12 +9,12 @@
                 <div :class="{'opacity-50': listing.timestamps.deleted_at}">
                     <div 
                         v-if="listing.timestamps.traded_at" 
-                        class="text-xs font-bold uppercase mb-2 text-green-900 bg-green-300 p-1 rounded-md w-fit"
+                        class="text-xs font-bold uppercase mb-2 text-white bg-light-primary p-1 ml-4 rounded-md w-fit"
                     >
                         Wymieniono
                     </div>
                     <div class="xl:flex items-center gap-2">
-                        <ListingDetails :listing="listing" class="!pl-0 !pt-0 md:!pl-4 md:!pt-3" />
+                        <ListingDetailsShort :listing="listing" class="!pl-0 !pt-0 md:!pl-4 md:!pt-3" />
                     </div>
                 </div>
                 <section>
@@ -88,7 +88,7 @@
 <script setup>
 import { Link, router } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
-import ListingDetails from '@/Components/ListingDetails.vue'
+import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import UserListingsFilter from '@/Components/UserListingsFilter.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 

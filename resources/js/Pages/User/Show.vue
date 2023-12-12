@@ -1,21 +1,19 @@
 <template>
     <BackButton />
 
-    <h1 class="page-title mb-4">Ofery wymiany</h1>
+    <h1 class="page-title mb-4">Oferty wymiany</h1>
     <section class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
         <div class="flex flex-col items-start md:col-span-7 gap-2">
             <Box v-if="!hasOffers" class="w-full text-center font-medium ">
                 <NoOffers />
             </Box>
 
-            
-
             <div v-else class="flex flex-col gap-4 w-full">
                 <Offer 
                     v-for="offer in props.listing.offers" 
                     :key="offer.id" 
                     :offer="offer" 
-                    :is-offer-chosen="props.listing.data.traded_at != null"
+                    :is-offer-chosen="props.listing.data.timestamps.traded_at != null"
                 />
             </div>
         </div>
