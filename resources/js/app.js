@@ -7,7 +7,7 @@ import Navbar from '@/Layouts/Navbar.vue'
 import '../css/app.css'
 
 createInertiaApp({
-    progress: { color: '#295e11' },
+    progress: { color: '#61ae3f' },
     resolve: async (name) => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         const page = (await pages[`./Pages/${name}.vue`])

@@ -8,6 +8,7 @@ use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserListingAcceptOfferController;
 use App\Http\Controllers\UserListingController;
+use App\Http\Controllers\UserListingRejectOfferController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,4 +50,6 @@ Route::prefix('user')
             ->only(['create', 'store', 'destroy']);
         Route::name('offer.accept')
             ->put('offer/{offer}/accept', UserListingAcceptOfferController::class);
+        Route::name('offer.reject')
+            ->put('offer/{offer}/reject', UserListingRejectOfferController::class);
     });

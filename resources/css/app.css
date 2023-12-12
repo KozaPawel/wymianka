@@ -64,6 +64,12 @@
     .btn-danger {
         @apply btn-accent text-light-danger hover:bg-light-danger hover:text-light-background
     }
+    .btn-reject {
+        @apply btn-accent hover:bg-light-danger hover:text-light-background
+    }
+    .btn-accept {
+        @apply btn-accent hover:bg-light-primary hover:text-light-background
+    }
     .menu-icon {
         @apply mr-2 ml-1 h-5 w-5
     }
