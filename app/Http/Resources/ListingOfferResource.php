@@ -14,9 +14,15 @@ class ListingOfferResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
         return [
             'data' => ListingResource::make($this),
-            'offers' => OfferResource::collection($this->offers),
+            'offers' => OfferResource::collection(
+                $this->offers()
+                    ->orderBy('accepted_at', 'desc')
+                    ->orderBy('created_at', 'desc')
+                    ->get()
+            ),
         ];
     }
 }

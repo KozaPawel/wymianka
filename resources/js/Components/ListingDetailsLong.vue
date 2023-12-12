@@ -24,13 +24,22 @@
             {{ props.listing.description }}
         </p>
     </div>
+    <a :href="mapLink" target="_blank">
+        <div class="flex flex-row justify-center items-center text-lg font-medium mt-10">
+            <MapPinIcon class="text-light-danger h-10 w-12" />
+            Zobacz na mapie
+        </div>
+    </a>
 </template>
 
 <script setup>
 import FormattedDate from '@/Components/UI/FormattedDate.vue'
 import TownInfo from '@/Components/UI/TownInfo.vue'
+import { MapPinIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
     listing: Object,
 })
+
+const mapLink = `https://www.google.com/maps/place/${props.listing.town.lat},${props.listing.town.lon}`
 </script>
