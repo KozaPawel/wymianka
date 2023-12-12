@@ -24,12 +24,14 @@
             {{ props.listing.description }}
         </p>
     </div>
-    <a :href="mapLink" target="_blank">
-        <div class="flex flex-row justify-center items-center text-lg font-medium mt-10">
-            <MapPinIcon class="text-light-danger h-10 w-12" />
-            Zobacz na mapie
-        </div>
-    </a>
+    <div class="flex flex-row justify-center w-full">
+        <a :href="mapLink" target="_blank">
+            <div class="flex flex-row items-center text-lg font-medium mt-10 text-accent w-full">
+                <MapPinIcon class="text-light-danger h-10 w-12" />
+                Zobacz miejscowość na mapie
+            </div>
+        </a>
+    </div>
 </template>
 
 <script setup>
