@@ -80,7 +80,7 @@
         @apply box-content bg-light-background border border-solid border-gray-200 rounded-full text-light-text
     }
     .carousel-image {
-        @apply object-scale-down w-fit mt-5 md:mt-10 md:w-full h-[40rem] lg:h-[43rem]
+        @apply object-scale-down w-fit mt-5 md:mt-10 md:w-full h-[30rem] 2xl:h-[40rem]
     }
     .page-title {
         @apply font-bold text-3xl mb-2 break-words w-full
