@@ -71,11 +71,6 @@ class Listing extends Model
 
     public function scopeWithoutTraded(Builder $query): Builder
     {
-        // return $query->doesntHave('offers')
-        //     ->orWhereHas('offers',
-        //         fn (Builder $query) => $query
-        //             ->whereNull('accepted_at')
-        //             ->whereNull('rejected_at'));
         return $query->whereNull('traded_at');
     }
 
@@ -102,17 +97,3 @@ class Listing extends Model
             );
     }
 }
-
-// ->select(
-//     'id',
-//     'user_id',
-//     'name',
-//     'description',
-//     'city',
-// )->groupBy(
-//     'id',
-//     'user_id',
-//     'name',
-//     'description',
-//     'city',
-// )
