@@ -6,6 +6,7 @@ use App\Http\Resources\ListingOfferResource;
 use App\Http\Resources\ListingResource;
 use App\Models\Category;
 use App\Models\Listing;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -42,6 +43,10 @@ class UserListingController extends Controller
 
     public function show(Listing $listing)
     {
+        if (! Gate::allows('show-offers', $listing)) {
+            abort(403);
+        }
+
         return inertia(
             'User/Show',
             [
