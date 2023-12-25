@@ -3,11 +3,11 @@
         <Combobox v-model="selectedTown">
             <div class="relative">
                 <div
-                    class="relative w-full cursor-default overflow-hidden rounded-lg bg-light-accent text-left shadow-sm sm:text-sm combobox-focus"
+                    class="relative w-full cursor-default overflow-hidden rounded-lg bg-light-accent text-left shadow-sm sm:text-sm combobox-focus border border-gray-300"
                 >
                     <ComboboxInput
                         :display-value="(town) => `${town.name ? town.name + ',' : ''}${town.county ? ' ' + town.county + ',': ''} ${town.province ? town.province : ''}`.trim()"
-                        class="input w-full bg-light-accent border-none py-2 pl-3 pr-10 text-md leading-5"
+                        class="input w-full border-none py-2 pl-3 pr-10 text-md leading-5"
                         autocomplete="off"
                         :placeholder="props.placeholder ? props.placeholder : 'Wyszukaj miejscowość'"
                         @change="handleInputChange"

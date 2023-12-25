@@ -20,7 +20,7 @@
                     v-model="filterForm.search" 
                     type="text" 
                     placeholder="Wyszukaj" 
-                    class="input text-md border border-transparent w-full"
+                    class="input text-md w-full"
                 />
             </div>
 

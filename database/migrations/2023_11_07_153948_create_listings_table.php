@@ -21,6 +21,8 @@ return new class extends Migration
                 ->constrained('towns');
             $table->string('name');
             $table->string('description');
+            $table->boolean('is_hidden')
+                ->default(false);
             $table->timestamp('traded_at')
                 ->nullable();
             $table->timestamps();

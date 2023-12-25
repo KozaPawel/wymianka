@@ -31,7 +31,7 @@ class ListingPolicy
             return true;
         }
 
-        return $listing->traded_at === null;
+        return $listing->is_hidden === 0;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\ListingOfferResource;
 use App\Http\Resources\ListingResource;
+use App\Http\Resources\UserListingResource;
 use App\Models\Category;
 use App\Models\Listing;
 use Gate;
@@ -21,12 +22,12 @@ class UserListingController extends Controller
     {
         $filters = [
             'deleted' => $request->boolean('deleted'),
-            ...$request->only(['by', 'order']),
+            ...$request->only(['by', 'order', 'status']),
         ];
 
         $listings = Auth::user()
             ->listings()
-            ->filter($filters)
+            ->filterUserListings($filters)
             ->mostRecent()
             ->withCount('images')
             ->withCount('offers')
@@ -37,7 +38,7 @@ class UserListingController extends Controller
             'User/Index',
             [
                 'filters' => $filters,
-                'listings' => ListingResource::collection($listings),
+                'listings' => UserListingResource::collection($listings),
             ]);
     }
 

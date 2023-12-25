@@ -22,6 +22,7 @@ class ListingFactory extends Factory
             'user_id' => fake()->numberBetween(1, 2),
             'category_id' => fake()->numberBetween(1, 3),
             'town_id' => fake()->numberBetween(1, 48434),
+            'is_hidden' => false,
         ];
     }
 }
