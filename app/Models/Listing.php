@@ -64,29 +64,30 @@ class Listing extends Model
         );
     }
 
+    public function offered(): HasMany
+    {
+        return $this->hasMany(
+            Offer::class,
+            'offer_listing_id'
+        );
+    }
+
     public function scopeMostRecent(Builder $query): Builder
     {
-        return $query->latest();
+        return $query->latest('listings.created_at');
     }
 
-    public function scopeWithoutTraded(Builder $query): Builder
+    public function scopeWithoutHidden(Builder $query): Builder
     {
-        return $query->whereNull('traded_at');
+        return $query->where('is_hidden', 'false');
     }
 
-    public function scopeFilter(Builder $query, array $filters): Builder
+    public function scopeFilterAllListings(Builder $query, array $filters): Builder
     {
         return $query
             ->when(
                 $filters['search'] ?? false,
                 fn ($query, $value) => $query->where('name', 'like', "%{$value}%")
-            )->when(
-                $filters['deleted'] ?? false,
-                fn ($query, $value) => $query->withTrashed()
-            )->when(
-                $filters['by'] ?? $query,
-                fn ($query, $value) => ! in_array($value, $this->sortable) ? $query :
-                    $query->orderBy($value, $filters['order'] ?? 'desc')
             )->when(
                 $filters['categories'] ?? $query,
                 fn ($query, $value) => empty($filters['categories']) ? $query :
@@ -94,6 +95,23 @@ class Listing extends Model
             )->when(
                 $filters['town'] ?? false,
                 fn ($query, $value) => $query->where('town_id', $value)
+            );
+    }
+
+    public function scopeFilterUserListings(Builder $query, array $filters): Builder
+    {
+        return $query
+            ->when(
+                $filters['deleted'] ?? false,
+                fn ($query, $value) => $query->withTrashed()
+            )->when(
+                $filters['by'] ?? $query,
+                fn ($query, $value) => ! in_array($value, $this->sortable) ? $query :
+                    $query->orderBy($value, $filters['order'] ?? 'desc')
+            )->when(
+                $filters['status'] ?? false,
+                fn ($query, $value) => $value === 'ended' ? $query->whereNotNull('traded_at') :
+                    ($value === 'in_progress' ? $query->where('is_hidden', 1)->whereNull('traded_at') : $query->where('is_hidden', 0))
             );
     }
 }

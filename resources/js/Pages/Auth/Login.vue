@@ -22,7 +22,7 @@
         </div>
     </form>
 </template>
-<!-- 6c3c3c -->
+
 <script setup>
 import { useForm, Link } from '@inertiajs/vue3'
 import ErrorMessage from '@/Components/ErrorMessage.vue'

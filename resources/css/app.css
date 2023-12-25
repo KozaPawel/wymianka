@@ -41,7 +41,7 @@
     }
     .input {
         @apply block w-full p-2 rounded-md shadow-sm transition duration-200 ease-in border border-gray-300 h-10 pl-3
-            bg-light-accent placeholder-gray-600 focus:outline-none focus:border-light-focus focus:ring-1 focus:ring-light-focus
+            bg-light-background-200 placeholder-gray-600 focus:outline-none focus:border-light-focus focus:ring-1 focus:ring-light-focus
     }
     .input-checkbox {
         @apply h-4 w-4 rounded border-light-hover-gray text-light-primary hover:cursor-pointer hover:border-light-primary focus:ring-offset-0 focus:ring-transparent
@@ -91,7 +91,7 @@
     .select {
         @apply input hover:cursor-pointer
     }
-    .townsearch-border {
-        @apply border border-gray-300 rounded-md
+    .listing-label {
+        @apply text-xs font-bold uppercase mb-2 text-white p-1 md:ml-4 rounded-md w-fit
     }
 }

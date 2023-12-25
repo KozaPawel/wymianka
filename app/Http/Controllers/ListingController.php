@@ -25,8 +25,8 @@ class ListingController extends Controller
         ]);
 
         $listings = Listing::mostRecent()
-            ->filter($filters)
-            ->withoutTraded()
+            ->filterAllListings($filters)
+            ->withoutHidden()
             ->paginate(12)
             ->withQueryString();
 
@@ -51,6 +51,7 @@ class ListingController extends Controller
         $userListings = ! Auth::user() ? null :
             Auth::user()
                 ->listings()
+                ->withoutHidden()
                 ->get();
 
         return inertia(

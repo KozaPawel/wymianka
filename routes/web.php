@@ -7,7 +7,9 @@ use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserListingAcceptOfferController;
+use App\Http\Controllers\UserListingCancelTradeController;
 use App\Http\Controllers\UserListingController;
+use App\Http\Controllers\UserListingEndTradeController;
 use App\Http\Controllers\UserListingRejectOfferController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,4 +54,8 @@ Route::prefix('user')
             ->put('offer/{offer}/accept', UserListingAcceptOfferController::class);
         Route::name('offer.reject')
             ->put('offer/{offer}/reject', UserListingRejectOfferController::class);
+        Route::name('trade.cancel')
+            ->put('offer/{offer}/cancel', UserListingCancelTradeController::class);
+        Route::name('trade.end')
+            ->put('offer/{offer}/end', UserListingEndTradeController::class);
     });

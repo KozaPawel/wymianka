@@ -9,7 +9,10 @@
                 >
                     Zaakceptowana
                 </span>
-                <span v-if="offer.rejected_at" class="ml-4 text-white text-sm bg-light-danger rounded-md p-1">
+                <span v-if="offer.rejected_at && offer.cancelled_at" class="ml-4 text-white text-sm bg-light-danger rounded-md p-1">
+                    Anulowana wymiana
+                </span>
+                <span v-if="offer.rejected_at && !offer.cancelled_at" class="ml-4 text-white text-sm bg-light-danger rounded-md p-1">
                     Odrzucona
                 </span>
             </div>

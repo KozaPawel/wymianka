@@ -1,12 +1,12 @@
 <template>
     <form>
-        <div class="flex flex-wrap flex-col mb-4 mt-4 gap-2">
-            <div class="flex gap-1">
-                <select v-model="filterForm.by" class="select w-32 border-transparent">
+        <div class="flex flex-wrap flex-row items-center mb-4 mt-4 gap-2">
+            <div class="flex">
+                <select v-model="filterForm.by" class="select w-32 rounded-r-none">
                     <option value="created_at">Dodano</option>
                     <option value="updated_at">Edytowano</option>
                 </select>
-                <select v-model="filterForm.order" class="select w-44 border-transparent">
+                <select v-model="filterForm.order" class="select w-44 rounded-l-none border-l-0">
                     <option value="desc">- od najnowszych</option>
                     <option value="asc">- od najstarszych</option>
                 </select>
@@ -20,6 +20,13 @@
                 />
                 <label for="deleted" class="hover:cursor-pointer hover:underline">Usunięte</label>
             </div>
+        </div>
+        <div>
+            <select v-model="filterForm.status" class="select w-full md:w-56">
+                <option value="all">Wystawione przedmioty</option>
+                <option value="in_progress">Wymiany w trakcie</option>
+                <option value="ended">Zakończone wymiany</option>
+            </select>
         </div>
     </form>
 </template>
@@ -37,6 +44,7 @@ const filterForm = reactive({
     deleted: props.filters.deleted ?? false,
     by: props.filters.by ?? 'created_at',
     order: props.filters.order ?? 'desc',
+    status: props.filters.status ?? 'all',
 })
 
 watch(

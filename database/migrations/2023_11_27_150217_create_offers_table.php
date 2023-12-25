@@ -19,10 +19,11 @@ return new class extends Migration
                 ->constrained('listings');
             $table->foreignIdFor(User::class, 'trader_id')
                 ->constrained('users');
-            $table->foreignIdFor(Listing::class, 'offer_item_id')
+            $table->foreignIdFor(Listing::class, 'offer_listing_id')
                 ->constrained('listings');
             $table->timestamp('accepted_at')->nullable();
             $table->timestamp('rejected_at')->nullable();
+            $table->timestamp('cancelled_at')->nullable();
             $table->timestamps();
         });
     }

@@ -15,6 +15,7 @@ class Offer extends Model
     protected $fillable = [
         'accepted_at',
         'rejected_at',
+        'cancelled_at',
     ];
 
     public function listing(): BelongsTo
@@ -29,7 +30,7 @@ class Offer extends Model
     {
         return $this->belongsTo(
             Listing::class,
-            'offer_item_id'
+            'offer_listing_id'
         );
     }
 

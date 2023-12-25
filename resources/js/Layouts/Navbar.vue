@@ -32,7 +32,7 @@
                                 class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-light-background shadow-lg ring-1 ring-black/5 focus:outline-none"
                             >
                                 <div class="px-1 py-1">
-                                    <Link :href="route('user.listing.index')"> 
+                                    <Link :href="route('user.listing.index', { status: 'all'})"> 
                                         <MenuItem v-slot="{ active }">
                                             <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
                                                 <UserIcon

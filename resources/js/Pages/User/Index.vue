@@ -7,71 +7,19 @@
         <Box v-for="listing in listings.data" :key="listing.id" :class="{'border-dashed': listing.timestamps.deleted_at}">
             <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
                 <div :class="{'opacity-50': listing.timestamps.deleted_at}">
-                    <div 
-                        v-if="listing.timestamps.traded_at" 
-                        class="text-xs font-bold uppercase mb-2 text-white bg-light-primary p-1 ml-4 rounded-md w-fit"
-                    >
-                        Wymieniono
-                    </div>
-                    <div class="xl:flex items-center gap-2">
+                    <ListingLabel :listing="listing" />
+
+                    <div class="flex flex-col justify-start gap-2 w-fit">
                         <ListingDetailsShort :listing="listing" class="!pl-0 !pt-0 md:!pl-4 md:!pt-3" />
+
+                        <p v-if="listing.trade_for" class="pl-0 md:pl-4 md:!pt-2 text-sm">
+                            Za przedmiot użytkownika {{ listing.trade_for.user.name }}
+                        </p>
+                        <ListingDetailsShort v-if="listing.trade_for" :listing="listing.trade_for" class="!pl-0 !pt-0 md:!pl-4" />
                     </div>
                 </div>
-                <section>
-                    <div>
-                        <Link 
-                            v-if="!listing.timestamps.deleted_at"
-                            :href="route('user.listing.image.create', {listing: listing.id})" 
-                            class="block w-full btn-accent text-center"
-                        >
-                            Zdjęcia ({{ listing.images_count }})
-                        </Link>
-                    </div>
-                    
-                    <div class="mt-2">
-                        <Link 
-                            v-if="!listing.timestamps.deleted_at"
-                            :href="route('user.listing.show', {listing: listing.id})" 
-                            class="block w-full btn-accent text-center"
-                        >
-                            Oferty wymiany ({{ listing.offers_count }})
-                        </Link>
-                    </div>
 
-                    <div class="flex flex-row justify-between items-center gap-1 mt-2">
-                        <Link 
-                            v-if="!listing.timestamps.deleted_at" 
-                            class="btn-accent w-full text-center" 
-                            :href="route('listing.show', {listing: listing.id})"
-                        >
-                            Wyświetl
-                        </Link>
-                        <Link 
-                            v-if="!listing.timestamps.deleted_at" 
-                            class="btn-accent w-full text-center" 
-                            :href="route('user.listing.edit', {listing: listing.id})"
-                        >
-                            Edytuj
-                        </Link>
-
-                        <button 
-                            v-if="!listing.timestamps.deleted_at" 
-                            class="btn-danger w-full" 
-                            @click.once="deleteListing(listing)"
-                        >
-                            Usuń
-                        </button>
-
-                        <Link
-                            v-else 
-                            class="btn-accent w-full"
-                            :href="route('user.listing.restore', {listing: listing.id})"
-                            as="button" method="put"
-                        >
-                            Przywróć
-                        </Link>
-                    </div>
-                </section>
+                <ListingActionButtons :listing="listing" />
             </div>
         </Box>
 
@@ -86,11 +34,13 @@
 </template>
 
 <script setup>
-import { Link, router } from '@inertiajs/vue3'
+import { router } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import UserListingsFilter from '@/Components/UserListingsFilter.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
+import ListingActionButtons from '@/Components/ListingActionButtons.vue'
+import ListingLabel from '@/Components/ListingLabel.vue'
 
 defineProps({
     listings: Object,

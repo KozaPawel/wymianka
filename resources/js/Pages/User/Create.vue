@@ -15,7 +15,7 @@
 
             <div class="col-span-6">
                 <label class="label">Miejscowość</label>
-                <TownSearch class="townsearch-border" @selected-town="form.town_id = $event.id" />
+                <TownSearch class="lg:w-1/4" @selected-town="form.town_id = $event.id" />
                 <ErrorMessage :error="form.errors.town_id" />
             </div>
 
