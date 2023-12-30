@@ -37,7 +37,7 @@
 
                 <button 
                     class="btn-danger w-full" 
-                    @click.once="deleteListing(props.listing)"
+                    @click.once="deleteListing()"
                 >
                     Usuń
                 </button>
@@ -71,17 +71,22 @@
         >
             Przywróć
         </Link>
+
+        <div v-if="props.listing.timestamps.traded_at && !props.listing.userReviewed">
+            <AddUserReview :listing="props.listing" />
+        </div>
     </div>
 </template>
 
 <script setup>
 import { Link, router } from '@inertiajs/vue3'
+import AddUserReview from '@/Components/AddUserReview.vue'
 
 const props = defineProps({
     listing: Object,
 })
 
-const deleteListing = (listing) => {
+const deleteListing = () => {
     router.delete(route('user.listing.destroy', {listing: props.listing.id}))
 }
 

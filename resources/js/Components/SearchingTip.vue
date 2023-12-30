@@ -36,7 +36,7 @@
                                 class="flex flex-row items-center justify-between text-lg font-medium leading-6"
                             >
                                 <p>Wyszukiwanie ogłoszeń</p>
-                                <button type="button" class="mt-14 ml-14 md:mt-0 md:ml-0" @click="closeModal">
+                                <button type="button" class="ml-14 md:ml-0" @click="closeModal">
                                     <XMarkIcon class="h-8 w-8 hover:cursor-pointer" />
                                 </button>
                             </DialogTitle>
