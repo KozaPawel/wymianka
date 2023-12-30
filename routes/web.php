@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TownController;
 use App\Http\Controllers\UserListingAcceptOfferController;
 use App\Http\Controllers\UserListingCancelTradeController;
@@ -58,4 +59,6 @@ Route::prefix('user')
             ->put('offer/{offer}/cancel', UserListingCancelTradeController::class);
         Route::name('trade.end')
             ->put('offer/{offer}/end', UserListingEndTradeController::class);
+        Route::resource('review', ReviewController::class)
+            ->only(['store']);
     });

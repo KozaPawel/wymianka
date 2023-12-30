@@ -4,8 +4,12 @@
         <UserListingsFilter :filters="filters" />
     </section>
     <section class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <Box v-for="listing in listings.data" :key="listing.id" :class="{'border-dashed': listing.timestamps.deleted_at}">
-            <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
+        <Box
+            v-for="listing in listings.data" :key="listing.id" 
+            class="flex items-center w-full" 
+            :class="{'border-dashed': listing.timestamps.deleted_at}"
+        >
+            <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between w-full">
                 <div :class="{'opacity-50': listing.timestamps.deleted_at}">
                     <ListingLabel :listing="listing" />
 
@@ -34,7 +38,6 @@
 </template>
 
 <script setup>
-import { router } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import UserListingsFilter from '@/Components/UserListingsFilter.vue'
@@ -47,7 +50,4 @@ defineProps({
     filters: Object,
 })
 
-const deleteListing = (listing) => {
-    router.delete(route('user.listing.destroy', {listing: listing.id}))
-}
 </script>

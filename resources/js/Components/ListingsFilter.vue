@@ -2,18 +2,6 @@
     <div>
         <form @submit.prevent="filter">
             <div class="box mb-4 flex flex-wrap flex-col gap-2 items-start w-full ">
-                <!-- <div class="flex flex-nowrap items-center">
-                    <input v-model="filterForm.search" type="text" placeholder="Search" />
-                </div> -->
-                <!-- zamienić na sortowanie po ocenach użytkowników -->
-                <!-- <div class="flex flex-nowrap items-center">
-                    <select>
-                        <option :value="null">Beds</option>
-                    </select>
-                    <select>
-                        <option :value="null">Beds</option>
-                    </select>
-                </div> -->
                 <h2 class="text-2xl font-medium">Filtry</h2>
                 <h2 class="text-xl">Kategoria</h2>
                 

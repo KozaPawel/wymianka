@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Listing;
 use App\Models\Town;
 use App\Models\User;
+use App\Models\Review;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -13,6 +14,14 @@ class UserListingResource extends JsonResource
     public function toArray(Request $request): array
     {
         $hasAcceptedOffer = $this->id === $this->offers->whereNotNull('accepted_at')->pluck('listing_id')->first();
+
+        $tradeId = $hasAcceptedOffer ?
+        $this->whenNotNull(
+            $this->offers->whereNotNull('accepted_at')->pluck('id')->first()
+        ) :
+        $this->whenNotNull(
+            $this->offered->whereNotNull('accepted_at')->pluck('id')->first()
+        );
 
         return [
             'id' => $this->id,
@@ -32,13 +41,7 @@ class UserListingResource extends JsonResource
                         Listing::find($this->offered->whereNotNull('accepted_at')->pluck('listing_id')->first())
                     )
                 ),
-            'trade_id' => $hasAcceptedOffer ?
-                $this->whenNotNull(
-                    $this->offers->whereNotNull('accepted_at')->pluck('id')->first()
-                ) :
-                $this->whenNotNull(
-                    $this->offered->whereNotNull('accepted_at')->pluck('id')->first()
-                ),
+            'trade_id' => $tradeId,
             'can_mark_as_finished' => $this->id === $this->offers->whereNotNull('accepted_at')->pluck('listing_id')->first(),
             'town' => TownResource::make(Town::find($this->town_id)),
             'timestamps' => [
@@ -54,6 +57,7 @@ class UserListingResource extends JsonResource
                 'traded_at' => $this->whenNotNull($this->traded_at),
                 'deleted_at' => $this->whenNotNull($this->deleted_at),
             ],
+            'userReviewed' => Review::all()->where('by_user_id', $this->owner->id)->where('trade_id', $tradeId)->isNotEmpty()
         ];
     }
 }
