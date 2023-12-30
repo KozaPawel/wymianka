@@ -5,13 +5,13 @@
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6">
                 <label class="label">Tytuł ogłoszenia</label>
-                <input v-model="form.name" type="text" class="input" />
+                <input v-model="form.name" type="text" class="input" required />
                 <ErrorMessage :error="form.errors.name" />
             </div>
 
             <div class="col-span-6">
                 <label class="label">Opis</label>
-                <input v-model="form.description" type="text" class="input" />
+                <textarea v-model="form.description" type="text" class="input h-40" required />
                 <ErrorMessage :error="form.errors.description" />
             </div>
 

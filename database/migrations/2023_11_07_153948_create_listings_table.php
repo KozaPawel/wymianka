@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignIdFor(Town::class, 'town_id')
                 ->constrained('towns');
             $table->string('name');
-            $table->string('description');
+            $table->text('description');
             $table->boolean('is_hidden')
                 ->default(false);
             $table->timestamp('traded_at')
