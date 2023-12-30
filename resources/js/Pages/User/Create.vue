@@ -9,7 +9,7 @@
 
             <div class="col-span-6">
                 <label class="label">Opis</label>
-                <input v-model="form.description" type="text" class="input" required />
+                <textarea v-model="form.description" type="text" class="input h-40" required />
                 <ErrorMessage :error="form.errors.description" />
             </div>
 
