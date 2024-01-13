@@ -11,7 +11,7 @@
                     <option value="asc">- od najstarszych</option>
                 </select>
             </div>
-            <div class="flex flex-nowrap items-center gap-2">
+            <div v-if="page.props.filters.status === 'all'" class="flex flex-nowrap items-center gap-2">
                 <input
                     id="deleted" 
                     v-model="filterForm.deleted"
@@ -21,20 +21,22 @@
                 <label for="deleted" class="hover:cursor-pointer hover:underline">Usunięte</label>
             </div>
         </div>
-        <div>
+        <!-- <div>
             <select v-model="filterForm.status" class="select w-full md:w-56">
                 <option value="all">Wystawione przedmioty</option>
                 <option value="in_progress">Wymiany w trakcie</option>
                 <option value="ended">Zakończone wymiany</option>
             </select>
-        </div>
+        </div> -->
     </form>
 </template>
 
 <script setup>
 import { reactive, watch } from 'vue'
-import { router } from '@inertiajs/vue3'
+import { router, usePage } from '@inertiajs/vue3'
 import { debounce } from 'lodash'
+
+const page = usePage()
 
 const props = defineProps({
     filters: Object,

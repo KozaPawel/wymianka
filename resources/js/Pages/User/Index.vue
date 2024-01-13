@@ -1,5 +1,11 @@
 <template>
-    <h1 class="page-title">Twoje ogłoszenia</h1>
+    <h1 class="page-title">
+        {{ 
+            page.props.filters.status === 'in_progress' || page.props.filters.status === 'ended' ? 
+                "Twoje wymiany" : 
+                "Twoje ogłoszenia" 
+        }}
+    </h1>
     <section class="mb-4">
         <UserListingsFilter :filters="filters" />
     </section>
@@ -28,7 +34,11 @@
         </Box>
 
         <div v-if="!listings.data.length" class="text-medium text-xl"> 
-            Brak ogłoszeń do wyświetlenia
+            {{ 
+                page.props.filters.status === 'in_progress' || page.props.filters.status === 'ended' ? 
+                    "Brak wymian do wyświetlenia" : 
+                    "Brak ogłoszeń do wyświetlenia" 
+            }}
         </div>
     </section>
 
@@ -38,12 +48,15 @@
 </template>
 
 <script setup>
+import { usePage } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import UserListingsFilter from '@/Components/UserListingsFilter.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 import ListingActionButtons from '@/Components/ListingActionButtons.vue'
 import ListingLabel from '@/Components/ListingLabel.vue'
+
+const page = usePage()
 
 defineProps({
     listings: Object,

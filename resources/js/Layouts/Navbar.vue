@@ -35,27 +35,15 @@
                                     <Link :href="route('user.listing.index', { status: 'all'})"> 
                                         <MenuItem v-slot="{ active }">
                                             <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
-                                                <UserIcon
+                                                <ListBulletIcon
                                                     class="menu-icon"
                                                     aria-hidden="true"
                                                 />
-                                                Profil
+                                                Ogłoszenia
                                             </button>
                                         </MenuItem>
                                     </Link>
-
-                                    <Link :href="route('chat.room.index')"> 
-                                        <MenuItem v-slot="{ active }">
-                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
-                                                <ChatBubbleOvalLeftEllipsisIcon
-                                                    class="menu-icon"
-                                                    aria-hidden="true"
-                                                />
-                                                Wiadomości
-                                            </button>
-                                        </MenuItem>
-                                    </Link>
-
+                                    
                                     <Link :href="route('user.listing.create')"> 
                                         <MenuItem v-slot="{ active }">
                                             <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
@@ -64,6 +52,46 @@
                                                     aria-hidden="true"
                                                 />
                                                 Dodaj ogłoszenie
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+                                </div>
+
+                                <div class="px-1 py-1">
+                                    <Link :href="route('user.listing.index', { status: 'in_progress'})"> 
+                                        <MenuItem v-slot="{ active }">
+                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
+                                                <ArrowPathIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Wymiany w trakcie
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+
+                                    <Link :href="route('user.listing.index', { status: 'ended'})"> 
+                                        <MenuItem v-slot="{ active }">
+                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
+                                                <ArrowsRightLeftIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Zakończone wymiany
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+                                </div>
+                                
+                                <div class="px-1 py-1">
+                                    <Link :href="route('chat.room.index')"> 
+                                        <MenuItem v-slot="{ active }">
+                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
+                                                <ChatBubbleOvalLeftEllipsisIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Wiadomości
                                             </button>
                                         </MenuItem>
                                     </Link>
@@ -126,6 +154,9 @@ import {
     PlusIcon, 
     ArrowRightOnRectangleIcon, 
     ChatBubbleOvalLeftEllipsisIcon,
+    ArrowsRightLeftIcon,
+    ArrowPathIcon,
+    ListBulletIcon,
 } from '@heroicons/vue/20/solid'
 import { useToast } from 'vue-toastification'
 
