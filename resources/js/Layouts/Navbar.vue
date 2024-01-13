@@ -44,6 +44,18 @@
                                         </MenuItem>
                                     </Link>
 
+                                    <Link :href="route('chat.room.index')"> 
+                                        <MenuItem v-slot="{ active }">
+                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
+                                                <ChatBubbleOvalLeftEllipsisIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Wiadomości
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+
                                     <Link :href="route('user.listing.create')"> 
                                         <MenuItem v-slot="{ active }">
                                             <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
@@ -113,6 +125,7 @@ import {
     UserIcon, 
     PlusIcon, 
     ArrowRightOnRectangleIcon, 
+    ChatBubbleOvalLeftEllipsisIcon,
 } from '@heroicons/vue/20/solid'
 import { useToast } from 'vue-toastification'
 

@@ -1,18 +1,20 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TownController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ChatRoomController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ChatMessageController;
+use App\Http\Controllers\UserListingController;
 use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\TownController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserListingEndTradeController;
 use App\Http\Controllers\UserListingAcceptOfferController;
 use App\Http\Controllers\UserListingCancelTradeController;
-use App\Http\Controllers\UserListingController;
-use App\Http\Controllers\UserListingEndTradeController;
 use App\Http\Controllers\UserListingRejectOfferController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect('/listing');
@@ -61,4 +63,18 @@ Route::prefix('user')
             ->put('offer/{offer}/end', UserListingEndTradeController::class);
         Route::resource('review', ReviewController::class)
             ->only(['store']);
+    });
+
+Route::name('chat.')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/chat', [ChatRoomController::class, 'index'])
+            ->name('room.index');
+        Route::post('/chat/room/show', [ChatRoomController::class, 'show'])
+            ->name('room.show');
+
+        Route::get('/chat/room/{roomId}/messages', [ChatMessageController::class, 'index'])
+            ->name('message.index');
+        Route::post('/chat/room/{roomId}/message', [ChatMessageController::class, 'store'])
+            ->name('message.store');
     });
