@@ -16,6 +16,17 @@
             </Link>
         </div>
 
+        <div v-if="props.listing.timestamps.trade_started_at || props.listing.timestamps.traded_at">
+            <Link 
+                class="btn-accent w-full" 
+                :class="{'mb-2': page.props.filters.status === 'in_progress'}"
+                :href="route('chat.room.show', {userId: props.listing.trade_for.user.id})"
+                as="button" method="post"
+            >
+                Wyślij wiadomość
+            </Link>
+        </div>
+
         <div v-if="!props.listing.timestamps.traded_at" class="">
             <div
                 v-if="!props.listing.timestamps.deleted_at && !props.listing.timestamps.trade_started_at" 
@@ -52,8 +63,7 @@
                 >
                     Oznacz jako zakończoną
                 </Link>
-                <Link 
-                            
+                <Link
                     class="btn-danger w-full" 
                     :href="route('user.trade.cancel', {offer: props.listing.trade_id})"
                     as="button" method="put"
@@ -80,7 +90,10 @@
 
 <script setup>
 import { Link, router } from '@inertiajs/vue3'
+import { usePage } from '@inertiajs/vue3'
 import AddUserReview from '@/Components/AddUserReview.vue'
+
+const page = usePage()
 
 const props = defineProps({
     listing: Object,
@@ -89,5 +102,4 @@ const props = defineProps({
 const deleteListing = () => {
     router.delete(route('user.listing.destroy', {listing: props.listing.id}))
 }
-
 </script>
