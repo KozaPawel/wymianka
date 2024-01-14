@@ -21,13 +21,6 @@
                 <label for="deleted" class="hover:cursor-pointer hover:underline">Usunięte</label>
             </div>
         </div>
-        <!-- <div>
-            <select v-model="filterForm.status" class="select w-full md:w-56">
-                <option value="all">Wystawione przedmioty</option>
-                <option value="in_progress">Wymiany w trakcie</option>
-                <option value="ended">Zakończone wymiany</option>
-            </select>
-        </div> -->
     </form>
 </template>
 

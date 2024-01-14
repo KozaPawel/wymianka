@@ -8,8 +8,6 @@
                 <NoOffers />
             </Box>
 
-
-            <!-- :is-offer-chosen="props.listing.data.timestamps.traded_at != null" -->
             <div v-else class="flex flex-col gap-4 w-full">
                 <Offer 
                     v-for="offer in props.listing.offers" 

@@ -13,10 +13,6 @@
                 :user-listings="userListings" 
                 :listing-id="props.listing.id"
             />
-            <!-- <Offer
-                v-if="offer" 
-                :offer="offer" 
-            /> -->
         </div>
     </div>
 </template>
@@ -27,9 +23,7 @@ import { usePage } from '@inertiajs/vue3'
 import ListingDetailsLong from '@/Components/ListingDetailsLong.vue'
 import Box from '@/Components/UI/Box.vue'
 import MakeOffer from '@/Components/MakeOffer.vue'
-import Offer from '@/Components/Offer.vue'
 import ImageCarousel from '@/Components/ImageCarousel.vue'
-import { MapPinIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
     listing: Object,
