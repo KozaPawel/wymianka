@@ -2,7 +2,7 @@
     <InformationCircleIcon class="h-8 w-8 hover:cursor-pointer text-gray-400" @click="openModal" />
 
     <TransitionRoot appear :show="isOpen" as="template">
-        <Dialog as="div" class="relative z-10" @close="closeModal">
+        <Dialog as="div" class="relative z-50" @close="closeModal">
             <TransitionChild
                 as="template"
                 enter="duration-300 ease-out"
