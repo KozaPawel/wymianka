@@ -35,7 +35,7 @@ class UserListingController extends Controller
             ->withQueryString();
 
         return inertia(
-            'User/Index',
+            'User/Listing/Index',
             [
                 'filters' => $filters,
                 'listings' => UserListingResource::collection($listings),
@@ -49,7 +49,7 @@ class UserListingController extends Controller
         }
 
         return inertia(
-            'User/Show',
+            'User/ListingOffers/Show',
             [
                 'listing' => ListingOfferResource::make($listing),
             ]
@@ -75,7 +75,7 @@ class UserListingController extends Controller
     public function create()
     {
         return inertia(
-            'User/Create',
+            'User/Listing/Create',
             [
                 'categories' => Category::all(),
             ]
@@ -109,7 +109,7 @@ class UserListingController extends Controller
     public function edit(Listing $listing)
     {
         return inertia(
-            'User/Edit',
+            'User/Listing/Edit',
             [
                 'listing' => ListingResource::make($listing),
             ]

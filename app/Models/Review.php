@@ -33,4 +33,12 @@ class Review extends Model
             'user_id'
         );
     }
+
+    public function trade(): BelongsTo
+    {
+        return $this->belongsTo(
+            Offer::class,
+            'trade_id'
+        );
+    }
 }

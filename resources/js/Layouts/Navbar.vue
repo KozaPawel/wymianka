@@ -84,6 +84,18 @@
                                 </div>
                                 
                                 <div class="px-1 py-1">
+                                    <Link :href="route('user.show', { user: user})"> 
+                                        <MenuItem v-slot="{ active }">
+                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
+                                                <UserIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Profil
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
+                                    
                                     <Link :href="route('chat.room.index')"> 
                                         <MenuItem v-slot="{ active }">
                                             <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
@@ -169,7 +181,7 @@ const flashMessage = computed(
 const toast = useToast()
 
 const user = computed(
-    () => page.props.user,
+    () => page.props.loggedUser,
 )
 
 watch(
