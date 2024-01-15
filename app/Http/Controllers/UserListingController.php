@@ -87,6 +87,7 @@ class UserListingController extends Controller
         $messages = [
             'town_id' => 'Pole miejscowość jest wymagane',
             'description.min' => 'Wymagane jest minimum 50 znaków',
+            'category_id' => 'Pole kategorii jest wymagane',
         ];
 
         $validatedData = $request->validate([

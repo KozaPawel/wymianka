@@ -9,8 +9,6 @@ class TownSeeder extends Seeder
 {
     public function run(): void
     {
-        // Town::truncate();
-
         $csvFile = fopen(base_path('database/data/towns.csv'), 'r');
 
         $firstline = true;

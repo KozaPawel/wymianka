@@ -23,7 +23,13 @@
                         <ListingDetailsShort :listing="listing" class="!pl-0 !pt-0 md:!pl-4 md:!pt-3" />
 
                         <p v-if="listing.trade_for" class="pl-0 md:pl-4 md:!pt-2 text-sm">
-                            Za przedmiot użytkownika {{ listing.trade_for.user.name }}
+                            Za przedmiot użytkownika 
+                            <Link
+                                :href="route('user.show', { user:listing.trade_for.user.id })" 
+                                class="hover:cursor-pointer hover:underline"
+                            >
+                                {{ listing.trade_for.user.name }}
+                            </Link>
                         </p>
                         <ListingDetailsShort v-if="listing.trade_for" :listing="listing.trade_for" class="!pl-0 !pt-0 md:!pl-4" />
                     </div>
@@ -48,7 +54,7 @@
 </template>
 
 <script setup>
-import { usePage } from '@inertiajs/vue3'
+import { usePage, Link } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import UserListingsFilter from '@/Components/UserListingsFilter.vue'

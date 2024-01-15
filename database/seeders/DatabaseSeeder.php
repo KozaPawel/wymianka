@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TownSeeder::class,
+            CategorySeeder::class,
         ]);
 
         \App\Models\User::factory()->create([
@@ -23,8 +24,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test2',
             'email' => 'test2@example.com',
         ]);
-
-        \App\Models\Category::factory(3)->create();
 
         \App\Models\Listing::factory(20)->create();
     }

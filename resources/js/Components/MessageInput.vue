@@ -1,5 +1,5 @@
 <template>
-    <div class="h-10 m-1">
+    <div class="h-full px-2 pb-2">
         <div class="grid md:grid-cols-6 gap-2 md:gap-10">
             <input v-model="form.message" type="text" placeholder="Treść wiadomości" class="input col-span-6 md:col-span-5 outline-none p-1" @keyup.enter="sendMessage()" />
             <button class="col-span-6 md:col-span-1 btn-accept" @click="sendMessage()">

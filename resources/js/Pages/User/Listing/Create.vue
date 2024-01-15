@@ -21,14 +21,9 @@
 
             <div class="col-span-6">
                 <label class="label">Kategoria</label>
-                <select v-model="form.category_id" required class="select lg:w-1/4" :class="{'text-gray-600': form.category_id === ''}">
-                    <option disabled value="">Wybierz kategorię</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">
-                        {{ category.name }}
-                    </option>
-                </select>
+                <CategorySearch class="lg:w-1/4" :categories="props.categories" @selected-category="form.category_id = $event.id" />
+                <ErrorMessage :error="form.errors.category_id" />
             </div>
-
 
             <div class="col-span-6">
                 <button type="submit" class="btn-primary">
@@ -41,10 +36,12 @@
 
 <script setup>
 import { useForm } from '@inertiajs/vue3'
+
 import ErrorMessage from '@/Components/ErrorMessage.vue'
 import TownSearch from '@/Components/TownSearch.vue'
+import CategorySearch from '@/Components/CategorySearch.vue'
 
-defineProps({
+const props = defineProps({
     categories: Object,
 })
 

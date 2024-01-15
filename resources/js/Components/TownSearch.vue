@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full md:w-96">
+    <div class="w-full md:w-96 z-20">
         <Combobox v-model="selectedTown">
             <div class="relative">
                 <div
@@ -37,7 +37,7 @@
                     @after-leave="query = ''"
                 >
                     <ComboboxOptions
-                        class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-background py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                        class="z-10 absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-light-background py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
                     >
                         <div
                             v-if="towns.length === 0 && filters.towns !== ''"
@@ -58,7 +58,7 @@
                             <li
                                 class="relative cursor-default select-none py-2 px-4 text-gray-900"
                                 :class="{
-                                    'bg-[#61ae3f]': active,
+                                    'bg-[#61ae3f] text-light-background-200': active,
                                     'border-none': towns[towns.length - 1] === town
                                 }"
                             >
@@ -80,7 +80,6 @@
 
 <script setup>
 import { ref, watch, reactive } from 'vue'
-import { usePage } from '@inertiajs/vue3'
 import axios from 'axios'
 import { debounce } from 'lodash'
 import {
@@ -92,8 +91,6 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import { ChevronUpDownIcon, XMarkIcon } from '@heroicons/vue/20/solid'
-
-const page = usePage()
 
 const props = defineProps({
     placeholder: String,

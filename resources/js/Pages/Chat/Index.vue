@@ -1,24 +1,34 @@
 <template>
-    <div class="grid grid-cols-12 gap-2">
-        <div class="col-span-12 md:col-span-2">
-            <div v-for="room in props.rooms" :key="room.id" class="flex flex-col items-start justify-center ">
-                <button class="w-full h-full" @click="changeRoom(room)">
-                    <div class="btn-accent flex mb-2" :class="{'bg-light-primary text-light-background-200 hover:text-black': room.id === chat.currentRoom.id}">
-                        <text>{{ room.conversation_with }}</text>
-                    </div>
-                </button>
+    <div class="grid grid-cols-12 gap-2 h-[33rem] 2xl:h-[43rem] ">
+        <Box class="col-span-12 md:col-span-2 h-full overflow-y-scroll">
+            <template #header>
+                <text class="font-semibold text-xl">
+                    Wiadomości
+                </text>
+            </template>
+            
+            <div v-if="props.rooms.length !== 0">
+                <div v-for="room in props.rooms" :key="room.id" class="flex flex-col items-start justify-center mt-4">
+                    <button class="w-full h-full" @click="changeRoom(room)">
+                        <div class="btn-accent flex mb-2" :class="{'bg-light-primary text-light-background-200 hover:text-black': room.id === chat.currentRoom.id}">
+                            <text>{{ room.conversation_with }}</text>
+                        </div>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="col-span-12 md:col-span-10">
+
+            <NoContacts v-else />
+        </Box>
+        <Box class="col-span-12 md:col-span-10 p-0">
             <div v-if="chat.currentRoom.length === 0" class="flex items-center justify-center text-medium text-xl">
-                Nie wybrano czatu
+                {{ props.rooms.length !== 0 ? "Nie wybrano czatu" : "" }}
             </div>
 
             <div v-else>
                 <Messages :messages="chat.messages" />
                 <MessageInput :room="chat.currentRoom" />
             </div>
-        </div>
+        </Box>
     </div>
 </template>
 
@@ -27,6 +37,8 @@ import axios from 'axios'
 import { reactive, onMounted, watch } from 'vue'
 import Messages from '@/Components/Messages.vue'
 import MessageInput from '@/Components/MessageInput.vue'
+import NoContacts from '@/Components/NoContacts.vue'
+import Box from '@/Components/UI/Box.vue'
 
 const connect = () => {
     if(chat.currentRoom) {

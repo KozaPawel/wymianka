@@ -10,7 +10,7 @@
                 >
                     <input :id="listing.id" :key="listing.id" v-model="form.offerId" type="radio" :value="listing.id" class="hidden" />
                     <label :key="listing.id" :for="listing.id" class="hover:cursor-pointer">
-                        <Box class="p-0" :class="{'shadow-sm': form.offerId === listing.id}">
+                        <Box class="p-0 h-full" :class="{'shadow-sm': form.offerId === listing.id}">
                             <img v-if="listing.images.length" :src="listing.images[0].source" class="aspect-square h-32 w-full object-cover rounded-t-md" />
                             <NoPhotos v-else class="aspect-square h-32 w-full object-cover rounded-t-md" />
                             <ListingDetailsShort :listing="listing" />
