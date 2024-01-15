@@ -11,6 +11,7 @@ use App\Http\Controllers\UserListingController;
 use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserListingEndTradeController;
 use App\Http\Controllers\UserListingAcceptOfferController;
 use App\Http\Controllers\UserListingCancelTradeController;
@@ -64,6 +65,9 @@ Route::prefix('user')
         Route::resource('review', ReviewController::class)
             ->only(['store']);
     });
+
+Route::get('user/{user}', [UserController::class, 'show'])
+    ->name('user.show');
 
 Route::name('chat.')
     ->middleware('auth')

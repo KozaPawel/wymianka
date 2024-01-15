@@ -19,7 +19,7 @@
         <div v-if="props.listing.timestamps.trade_started_at || props.listing.timestamps.traded_at">
             <Link 
                 class="btn-accent w-full" 
-                :class="{'mb-2': page.props.filters.status === 'in_progress'}"
+                :class="{'mb-2': (page.props.filters.status === 'in_progress') || (page.props.filters.status === 'ended' && !props.listing.userReviewed)}"
                 :href="route('chat.room.show', {userId: props.listing.trade_for.user.id})"
                 as="button" method="post"
             >

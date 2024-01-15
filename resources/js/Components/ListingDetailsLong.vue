@@ -10,7 +10,10 @@
         </p>
         
         <p class="text-md ">
-            Przez {{ props.listing.user.name }}
+            Przez 
+            <Link :href="route('user.show', { user: props.listing.user.id })" class="hover:underline w-fit">
+                {{ props.listing.user.name }}
+            </Link>
         </p>
     </div>
 
@@ -35,6 +38,7 @@
 </template>
 
 <script setup>
+import { Link } from '@inertiajs/vue3'
 import FormattedDate from '@/Components/UI/FormattedDate.vue'
 import TownInfo from '@/Components/UI/TownInfo.vue'
 import { MapPinIcon } from '@heroicons/vue/20/solid'
