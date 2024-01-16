@@ -77,7 +77,7 @@
         @apply font-bold text-3xl mb-2 break-words w-full
     }
     .combobox-focus {
-        @apply transition duration-200 ease-in focus-within:border-light-focus focus-within:ring-2 focus-within:ring-light-focus
+        @apply transition duration-200 ease-in focus-within:border-light-focus focus-within:ring-1 focus-within:ring-light-focus
     }
     .select {
         @apply input hover:cursor-pointer
