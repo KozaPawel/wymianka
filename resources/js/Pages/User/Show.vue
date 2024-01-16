@@ -38,13 +38,15 @@
     </Box>
     
     <section v-if="content === 'listings'" class="mt-4">
-        <NoListings v-if="listings.length === 0" />
+        <div v-if="listings.length === 0" class="flex flex-col items-center justify-center">
+            <ListBulletIcon class="h-10 w-10" />
+            <span class="text-xl font-bold">Brak ogłoszeń do wyświetlenia</span>
+        </div>
 
         <div v-else class="grid grid-cols-12 gap-2">
             <Box v-for="listing in listings" :key="listing.id" class="col-span-6 md:col-span-4 xl:col-span-2 p-0">
                 <Link :href="route('listing.show', { listing: listing})">
-                    <img v-if="listing.images.length" :src="listing.images[0].source" class="aspect-square h-48 w-full object-cover rounded-t-md" />
-                    <NoPhotos v-else class="aspect-square h-48 w-full object-cover rounded-t-md" />
+                    <CoverPhoto :images="listing.images" class="h-48 w-full" />
                     <ListingDetailsShort :listing="listing" />
                 </Link>
             </Box>
@@ -52,7 +54,10 @@
     </section>
 
     <section v-if="content === 'reviews'" class="mt-4">
-        <NoReviews v-if="reviews.length === 0" />
+        <div v-if="reviews.length === 0" class="flex flex-col items-center justify-center">
+            <ClipboardDocumentListIcon class="h-10 w-10" />
+            <span class="text-xl font-bold">Brak opnii do wyświetlenia</span>
+        </div>
 
         <div v-else class="grid grid-cols-12 gap-2">
             <div v-for="review in reviews" :key="review.id" class="col-span-12 md:col-span-6 xl:col-span-4 h-full">
@@ -65,13 +70,12 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { Link } from '@inertiajs/vue3'
+import { ListBulletIcon, ClipboardDocumentListIcon } from '@heroicons/vue/20/solid'
 import Box from '@/Components/UI/Box.vue'
 import FormattedDate from '@/Components/UI/FormattedDate.vue'
 import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
-import NoPhotos from '@/Components/NoPhotos.vue'
-import NoListings from '@/Components/NoListings.vue'
-import NoReviews from '@/Components/NoReviews.vue'
 import Review from '@/Components/Review.vue'
+import CoverPhoto from '@/Components/CoverPhoto.vue'
 
 const props = defineProps({
     user: Object,
