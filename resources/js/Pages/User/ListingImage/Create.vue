@@ -10,9 +10,10 @@
         <form @submit.prevent="upload">
             <section class="flex items-center flex-col md:flex-row gap-2 my-4 w-full">
                 <input 
-                    class="border-2 rounded-md file:px-4 file:py-2 border-gray-300 
-                    file:text-gray-700 file:border-0 file:bg-gray-300 file:font-medium file:mr-4
-                    hover:border-gray-400 file:hover:bg-gray-400 file:hover:cursor-pointer hover:cursor-pointer w-full md:w-1/2" 
+                    class="border-2 rounded-md border-light-accent w-full md:w-1/2
+                    file:px-4 file:py-2 file:text-light-text file:border-0 file:bg-light-accent file:font-medium file:mr-4
+                    file:hover:bg-light-hover-gray file:hover:cursor-pointer hover:cursor-pointer hover:border-light-hover-gray
+                    focus:outline-none focus:border-light-accent focus:ring-0 focus:ring-light-focus"
                     type="file" multiple @input="addFiles"
                 />
                 <div class="flex flex-row gap-2 justify-between md:justify-start w-full">
