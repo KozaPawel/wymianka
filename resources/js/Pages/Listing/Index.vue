@@ -44,8 +44,7 @@
                 <Box v-for="listing in props.listings.data" :key="listing.id" class="p-0 overflow-hidden">
                     <div>
                         <Link :href="route('listing.show', {listing: listing.id})">
-                            <img v-if="listing.images.length" :src="listing.images[0].source" class="aspect-square h-full w-full object-cover rounded-t-md" />
-                            <NoPhotos v-else class="aspect-square" />
+                            <CoverPhoto :images="listing.images" class="h-full w-full object-cover rounded-t-md" />
                             <ListingDetailsShort :listing="listing" />
                         </Link>
                     </div>
@@ -70,8 +69,8 @@ import Box from '@/Components/UI/Box.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
 import ListingsFilter from '@/Components/ListingsFilter.vue'
 import TownSearch from '@/Components/TownSearch.vue'
-import NoPhotos from '@/Components/NoPhotos.vue'
 import SearchingTip from '@/Components/SearchingTip.vue'
+import CoverPhoto from '@/Components/CoverPhoto.vue'
 
 const props = defineProps({
     listings: Object,

@@ -5,7 +5,10 @@
     <section class="flex flex-col-reverse md:grid md:grid-cols-12 gap-4">
         <div class="flex flex-col items-start md:col-span-7 gap-2">
             <Box v-if="!hasOffers" class="w-full text-center font-medium ">
-                <NoOffers />
+                <div class="flex flex-col items-center justify-center">
+                    <ArrowsRightLeftIcon class="h-10 w-10" />
+                    <span class="text-xl font-bold">Brak ofert</span>
+                </div>
             </Box>
 
             <div v-else class="flex flex-col gap-4 w-full">
@@ -28,11 +31,11 @@
 
 <script setup>
 import { computed } from 'vue'
+import { ArrowsRightLeftIcon } from '@heroicons/vue/20/solid'
 import Box from '@/Components/UI/Box.vue'
 import ListingDetailsShort from '@/Components/ListingDetailsShort.vue'
 import Offer from '@/Components/Offer.vue'
 import BackButton from '@/Components/BackButton.vue'
-import NoOffers from '@/Components/NoOffers.vue'
 
 const props = defineProps({
     listing: Object,

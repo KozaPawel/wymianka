@@ -11,8 +11,7 @@
                     <input :id="listing.id" :key="listing.id" v-model="form.offerId" type="radio" :value="listing.id" class="hidden" />
                     <label :key="listing.id" :for="listing.id" class="hover:cursor-pointer">
                         <Box class="p-0 h-full" :class="{'shadow-sm': form.offerId === listing.id}">
-                            <img v-if="listing.images.length" :src="listing.images[0].source" class="aspect-square h-32 w-full object-cover rounded-t-md" />
-                            <NoPhotos v-else class="aspect-square h-32 w-full object-cover rounded-t-md" />
+                            <CoverPhoto :images="listing.images" class="h-32 w-full" />
                             <ListingDetailsShort :listing="listing" />
                         </Box>
                     </label>
@@ -30,7 +29,7 @@ import { useForm } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import ErrorMessage from './ErrorMessage.vue'
 import ListingDetailsShort from './ListingDetailsShort.vue'
-import NoPhotos from './NoPhotos.vue'
+import CoverPhoto from './CoverPhoto.vue'
 
 const form = useForm({
     offerId: props.offerId,

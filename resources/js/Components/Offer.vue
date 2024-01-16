@@ -34,8 +34,7 @@
                         <p class="text-2xl font-semibold mb-2">{{ offer.data.name }}</p>
 
                         <div class="flex justify-center">
-                            <img v-if="offer.data.images.length" :src="offer.data.images[0].source" class="aspect-square h-80 w-fit object-cover rounded-md" />
-                            <NoPhotos v-else class="aspect-square" />
+                            <CoverPhoto :images="offer.data.images" class="h-80 w-fit" />
                         </div>
                     </Link>
                 </div>
@@ -69,8 +68,8 @@ import { computed } from 'vue'
 import { Link } from '@inertiajs/vue3'
 import Box from '@/Components/UI/Box.vue'
 import FormattedDate from '@/Components/UI/FormattedDate.vue'
-import NoPhotos from '@/Components/NoPhotos.vue'
 import TownInfo from '@/Components/UI/TownInfo.vue'
+import CoverPhoto from './CoverPhoto.vue'
 
 const props = defineProps({
     offer: Object,
