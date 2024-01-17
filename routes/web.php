@@ -11,6 +11,7 @@ use App\Http\Controllers\UserListingController;
 use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserListingEndTradeController;
 use App\Http\Controllers\UserListingAcceptOfferController;
@@ -82,3 +83,8 @@ Route::name('chat.')
         Route::post('/chat/room/{roomId}/message', [ChatMessageController::class, 'store'])
             ->name('message.store');
     });
+
+
+    Route::resource('notification', NotificationController::class)
+        ->middleware('auth')
+        ->only(['index', 'update']);

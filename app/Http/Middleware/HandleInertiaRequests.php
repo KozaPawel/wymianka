@@ -43,7 +43,11 @@ class HandleInertiaRequests extends Middleware
                 'name' => $request->user()->name,
                 'email' => $request->user()->email,
             ] : null,
-            'loggedUser' => Auth::user(),
+            'loggedUser' => Auth::user() ? [
+                'id' => Auth::user()->id,
+                'name' => Auth::user()->name,
+                'notificationCount' => Auth::user()->unreadNotifications()->count()
+            ] : null,
         ]);
     }
 }
