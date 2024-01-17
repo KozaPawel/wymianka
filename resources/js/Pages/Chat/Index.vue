@@ -1,13 +1,18 @@
 <template>
-    <div class="grid grid-cols-12 gap-2 h-[33rem] 2xl:h-[43rem] ">
-        <Box class="col-span-12 md:col-span-2 h-full overflow-y-scroll">            
+    <div class="grid grid-cols-12 gap-2 lg:h-[33rem] 2xl:h-[43rem] ">
+        <button class="col-span-12 flex flex-row items-center w-full h-full gap-2 lg:hidden" :class="{'hidden lg:block': !chatOpen}" @click="closeChat">
+            <ArrowLeftIcon class="w-6 h-6" />
+            <text class="font-medium text-md">Kontakty</text>
+        </button>
+        <Box class="col-span-12 lg:col-span-2 h-full overflow-y-scroll" :class="{'hidden lg:block': chatOpen}">
             <div v-if="props.rooms.length !== 0">
-                <text class="font-semibold text-xl">
-                    Wiadomości
-                </text>
-                <div v-for="room in props.rooms" :key="room.id" class="flex flex-col items-start justify-center mt-4">
+                <div class="font-semibold text-xl mb-4">
+                    Kontakty
+                </div>
+                
+                <div v-for="room in props.rooms" :key="room.id" class="flex flex-col items-start justify-center">
                     <button class="w-full h-full" @click="changeRoom(room)">
-                        <div class="btn-accent flex mb-2" :class="{'bg-light-primary text-light-background-200 hover:text-black': room.id === chat.currentRoom.id}">
+                        <div class="btn-accent flex flex-col mb-2 items-start" :class="{'lg:bg-light-primary lg:text-light-background-200 hover:text-black': room.id === chat.currentRoom.id}">
                             <text>{{ room.conversation_with }}</text>
                         </div>
                     </button>
@@ -20,8 +25,8 @@
             </div>
         </Box>
         
-        <Box class="col-span-12 md:col-span-10 p-0">
-            <div v-if="chat.currentRoom.length === 0" class="flex items-center justify-center text-medium text-xl">
+        <Box class="col-span-12 lg:col-span-10 w-full h-full p-0" :class="{'hidden lg:block': !chatOpen}">
+            <div v-if="chat.currentRoom.length === 0" class="flex items-center justify-center text-medium text-xl" :class="{'p-4': props.rooms.length !== 0}">
                 {{ props.rooms.length !== 0 ? "Nie wybrano czatu" : "" }}
             </div>
 
@@ -35,11 +40,18 @@
 
 <script setup>
 import axios from 'axios'
-import { reactive, onMounted, watch } from 'vue'
-import { ChatBubbleBottomCenterTextIcon } from '@heroicons/vue/20/solid'
+import { reactive, onMounted, watch, ref } from 'vue'
+import { ChatBubbleBottomCenterTextIcon, ArrowLeftIcon } from '@heroicons/vue/20/solid'
 import Messages from '@/Components/Messages.vue'
 import MessageInput from '@/Components/MessageInput.vue'
 import Box from '@/Components/UI/Box.vue'
+
+const chatOpen = ref(false)
+
+const closeChat = () => {
+    disconnect(chat.currentRoom.id)
+    chatOpen.value = false
+}
 
 const connect = () => {
     if(chat.currentRoom) {
@@ -69,6 +81,7 @@ const chat = reactive({
 
 const changeRoom = (room) => {
     chat.currentRoom = room
+    chatOpen.value = true
 }
 
 const getMessages = () => {
