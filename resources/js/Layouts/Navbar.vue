@@ -6,7 +6,13 @@
                     <Link :href="route('listing.index')">Wymianka</Link>
                 </div>
 
-                <div v-if="user" class="text-right">
+                <div v-if="user" class="flex flex-row items-center gap-1 text-right">
+                    <Link :href="route('notification.index')" class="relative pr-1 py-1">
+                        <BellIcon class=" h-7 w-7" />
+                        <div v-if="notificationCount !== 0" class="absolute top-0 right-0 rounded-full w-4 h-4 text-center text-xs text-light-background-200 bg-light-danger">
+                            {{ notificationCount }}
+                        </div>
+                    </Link>
                     <Menu as="div" class="relative inline-block text-left">
                         <div>
                             <MenuButton 
@@ -169,6 +175,7 @@ import {
     ArrowsRightLeftIcon,
     ArrowPathIcon,
     ListBulletIcon,
+    BellIcon,
 } from '@heroicons/vue/20/solid'
 import { useToast } from 'vue-toastification'
 
@@ -182,6 +189,10 @@ const toast = useToast()
 
 const user = computed(
     () => page.props.loggedUser,
+)
+
+const notificationCount = computed(
+    () => Math.min(page.props.loggedUser.notificationCount, 9),
 )
 
 watch(
