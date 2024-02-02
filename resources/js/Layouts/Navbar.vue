@@ -8,7 +8,7 @@
 
                 <div v-if="user" class="flex flex-row items-center gap-1 text-right">
                     <Link :href="route('notification.index')" class="relative pr-1 py-1">
-                        <BellIcon class=" h-7 w-7" />
+                        <BellIcon class=" h-6 w-6" />
                         <div v-if="notificationCount !== 0" class="absolute top-0 right-0 rounded-full w-4 h-4 text-center text-xs text-light-background-200 bg-light-danger">
                             {{ notificationCount }}
                         </div>
@@ -168,15 +168,13 @@ import { Link, usePage } from '@inertiajs/vue3'
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue' 
 import { 
     ChevronDownIcon, 
-    UserIcon, 
     PlusIcon, 
     ArrowRightOnRectangleIcon, 
-    ChatBubbleOvalLeftEllipsisIcon,
     ArrowsRightLeftIcon,
     ArrowPathIcon,
     ListBulletIcon,
-    BellIcon,
 } from '@heroicons/vue/20/solid'
+import { BellIcon, UserIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/vue/24/outline'
 import { useToast } from 'vue-toastification'
 
 const page = usePage()

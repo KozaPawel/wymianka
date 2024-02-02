@@ -45,8 +45,9 @@
 
 <script setup>
 import { Link } from '@inertiajs/vue3'
-import Pagination from '@/Components/UI/Pagination.vue'
 import { BellSlashIcon } from '@heroicons/vue/20/solid'
+import Pagination from '@/Components/UI/Pagination.vue'
+
 const props = defineProps({
     notifications: Object,
 })

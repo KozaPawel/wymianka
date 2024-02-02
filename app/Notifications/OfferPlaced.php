@@ -23,21 +23,25 @@ class OfferPlaced extends Notification
 
     public function via(object $notifiable): array
     {
-        return ['database'];
+        return ['database', 'mail'];
     }
 
     public function toMail(object $notifiable): MailMessage
     {
+        $listing = Listing::find($this->offer->listing_id);
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Nowa oferta')
+                    ->line("Otrzymano nową ofertę dla {$listing->name}.")
+                    ->action(
+                        'Zobacz oferty wymiany', 
+                        route('user.listing.show', ['listing' => $listing->id])
+                    );
     }
 
     public function toArray(object $notifiable): array
     {
         return [
-            // 'offer_id' => $this->offer->id,
             'listing' => Listing::find($this->offer->listing_id),
             'offer' => Listing::find($this->offer->offer_listing_id),
             'trader' => UserResource::make(User::find($this->offer->trader_id)),
