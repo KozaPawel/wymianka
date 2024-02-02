@@ -9,7 +9,7 @@
                 <ListingDetailsLong :listing="props.listing" />
             </Box>
             <MakeOffer 
-                v-if="(user && user.id != props.listing.user.id) && !offer" 
+                v-if="(user && user.id != props.listing.user.id) && !offer && userListings.length !== 0" 
                 :user-listings="userListings" 
                 :listing-id="props.listing.id"
             />
