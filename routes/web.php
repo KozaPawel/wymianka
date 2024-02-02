@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TownController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ChatRoomController;
@@ -10,10 +12,10 @@ use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\UserListingController;
 use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\NotificationController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\UserListingEndTradeController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserListingAcceptOfferController;
 use App\Http\Controllers\UserListingCancelTradeController;
 use App\Http\Controllers\UserListingRejectOfferController;
@@ -41,11 +43,31 @@ Route::get('/register', [RegisterController::class, 'index'])
 Route::post('/register', [RegisterController::class, 'store'])
     ->name('register.store');
 
+Route::get('/email/verify', function () {
+    return inertia('Auth/VerifyEmail');
+})->middleware('auth')
+    ->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect()->route('listing.index')
+        ->with('success', 'Zweryfikowano adres email');
+})->middleware(['auth', 'signed'])
+    ->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('success', 'Wysłano link aktywacyjny');
+})->middleware(['auth', 'throttle:6,1'])
+    ->name('verification.send');
+
 Route::get('/towns', TownController::class)->name('towns');
 
 Route::prefix('user')
     ->name('user.')
-    ->middleware('auth')
+    ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::name('listing.restore')
             ->put(
@@ -84,7 +106,6 @@ Route::name('chat.')
             ->name('message.store');
     });
 
-
-    Route::resource('notification', NotificationController::class)
-        ->middleware('auth')
-        ->only(['index', 'update']);
+Route::resource('notification', NotificationController::class)
+    ->middleware('auth')
+    ->only(['index', 'update']);
