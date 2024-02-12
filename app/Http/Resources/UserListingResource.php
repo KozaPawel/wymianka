@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Category;
 use App\Models\Town;
 use App\Models\User;
 use App\Models\Review;
@@ -57,7 +58,8 @@ class UserListingResource extends JsonResource
                 'traded_at' => $this->whenNotNull($this->traded_at),
                 'deleted_at' => $this->whenNotNull($this->deleted_at),
             ],
-            'userReviewed' => Review::all()->where('by_user_id', $this->owner->id)->where('trade_id', $tradeId)->isNotEmpty()
+            'userReviewed' => Review::all()->where('by_user_id', $this->owner->id)->where('trade_id', $tradeId)->isNotEmpty(),
+            'category' => Category::find($this->category_id),
         ];
     }
 }

@@ -17,7 +17,9 @@
         >
             <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between w-full">
                 <div :class="{'opacity-50': listing.timestamps.deleted_at}">
-                    <ListingLabel :listing="listing" />
+                    <div class="mb-2 md:ml-4 w-fit">
+                        <ListingLabel :listing="listing" />
+                    </div>
 
                     <div class="flex flex-col justify-start gap-2 w-fit">
                         <ListingDetailsShort :listing="listing" class="!pl-0 !pt-0 md:!pl-4 md:!pt-3" />

@@ -140,6 +140,7 @@ function closeModal() {
     form.summary = ''
     form.errors = {}
 }
+
 function openModal() {
     isOpen.value = true
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPanelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TownController;
@@ -109,3 +110,14 @@ Route::name('chat.')
 Route::resource('notification', NotificationController::class)
     ->middleware('auth')
     ->only(['index', 'update']);
+
+Route::name('admin.')
+    ->middleware('admin')
+    ->group(function () {
+        Route::get('/admin/listings', [AdminPanelController::class, 'listings'])
+            ->name('listings');
+        Route::get('/admin/reviews', [AdminPanelController::class, 'reviews'])
+            ->name('reviews');
+        Route::delete('/admin/review/{review}', [ReviewController::class, 'destroy'])
+            ->name('review.destroy');
+    });
