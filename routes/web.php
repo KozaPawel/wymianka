@@ -15,6 +15,7 @@ use App\Http\Controllers\ListingImageController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserListingEndTradeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserListingAcceptOfferController;
@@ -118,6 +119,10 @@ Route::name('admin.')
             ->name('listings');
         Route::get('/admin/reviews', [AdminPanelController::class, 'reviews'])
             ->name('reviews');
+            Route::get('/admin/categories', [AdminPanelController::class, 'categories'])
+            ->name('categories');
         Route::delete('/admin/review/{review}', [ReviewController::class, 'destroy'])
             ->name('review.destroy');
+        Route::resource('admin/category', CategoryController::class)
+            ->only(['store', 'destroy']);
     });

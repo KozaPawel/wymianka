@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\CategoryResource;
 use App\Models\Review;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserListingResource;
+use App\Models\Category;
 
 class AdminPanelController extends Controller
 {
-    function listings()
+    public function listings()
     {
         $listings = Listing::mostRecent()
             ->with('category')
@@ -21,7 +23,7 @@ class AdminPanelController extends Controller
         ]);
     }
 
-    function reviews()
+    public function reviews()
     {
         return inertia('AdminPanel/Review/Index', [
             'reviews' => Review::mostRecent()
@@ -31,19 +33,16 @@ class AdminPanelController extends Controller
         ]);
     }
 
-    function categories(Request $request)
+    public function categories()
     {
-        $listings = Listing::mostRecent()
-            ->with('category')
-            ->paginate(20)
-            ->withQueryString();
+        $categories = Category::paginate(10);
 
-        return inertia('AdminPanel/Index', [
-            'listings' => UserListingResource::collection($listings)
+        return inertia('AdminPanel/Category/Index', [
+            'categories' => CategoryResource::collection($categories)
         ]);
     }
 
-    function towns(Request $request)
+    public function towns()
     {
         $listings = Listing::mostRecent()
             ->with('category')
