@@ -24,4 +24,12 @@ class ReviewController extends Controller
         return redirect()->back()
             ->with('success', 'Wystawiono ocenę');
     }
+
+    public function destroy(Review $review)
+    {
+        $review->deleteOrFail();
+
+        return redirect()->back()
+            ->with('success', 'Usunięto opinie');
+    }
 }

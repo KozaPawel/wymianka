@@ -38,6 +38,17 @@
                                 class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-light-background shadow-lg ring-1 ring-black/5 focus:outline-none"
                             >
                                 <div class="px-1 py-1">
+                                    <Link :href="route('admin.listings')">
+                                        <MenuItem v-slot="{ active }">
+                                            <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
+                                                <ComputerDesktopIcon
+                                                    class="menu-icon"
+                                                    aria-hidden="true"
+                                                />
+                                                Panel Administratora
+                                            </button>
+                                        </MenuItem>
+                                    </Link>
                                     <Link :href="route('user.listing.index', { status: 'all'})"> 
                                         <MenuItem v-slot="{ active }">
                                             <button :class="[active ? 'bg-light-hover-gray' : '', 'menu-item' ]">
@@ -173,6 +184,7 @@ import {
     ArrowsRightLeftIcon,
     ArrowPathIcon,
     ListBulletIcon,
+    ComputerDesktopIcon,
 } from '@heroicons/vue/20/solid'
 import { BellIcon, UserIcon, ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/vue/24/outline'
 import { useToast } from 'vue-toastification'

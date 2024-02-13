@@ -7,17 +7,58 @@ use Illuminate\Http\Request;
 
 class TownController extends Controller
 {
-    public function __invoke(Request $request)
+    public function store(Request $request)
     {
-        $filters = $request->only([
-            'towns',
+        $validatedData = $request->validate([
+            'name' => 'required|string',
+            'county' => 'nullable',
+            'province' => 'required|string',
+            'lat' => 'required|numeric',
+            'lon' => 'required|numeric',
         ]);
 
-        $towns = Town::orderBy('search')
-            ->filter($filters)
-            ->paginate(20)
-            ->take(20);
+        $search = $request->name . ($request->filled('county') ? ' ' . $request->county . ' ' : ' ') . $request->province;
 
-        return response()->json($towns);
+        Town::create([
+            'name' => $validatedData['name'],
+            'county' => $validatedData['county'],
+            'province' => $validatedData['province'],
+            'lat' => $validatedData['lat'],
+            'lon' => $validatedData['lon'],
+            'search' => $search
+        ]);
+
+        return redirect()->back()
+            ->with('success', 'Dodano nową miejscowość');
     }
+
+    public function update(Request $request, Town $town)
+    {
+        $town->update(
+            $request->validate([
+                'name' => 'required|string',
+                'county' => 'nullable',
+                'province' => 'required|string',
+                'lat' => 'required|numeric',
+                'lon' => 'required|numeric',
+                ]),
+        );
+
+        $search = $request->name . ($request->filled('county') ? ' ' . $request->county . ' ' : ' ') . $request->province;
+
+        $town->update(['search' => $search]);
+
+        return redirect()->back()
+            ->with('success', 'Zaktualizowano miejscowość');
+        
+    }
+
+    public function destroy(Town $town)
+    {
+        $town->deleteOrFail();
+
+        return redirect()->back()
+            ->with('success', 'Usunięto miejscowość');
+    }
+
 }

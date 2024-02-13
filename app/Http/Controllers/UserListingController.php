@@ -101,8 +101,6 @@ class UserListingController extends Controller
 
         $request->user()->listings()->create($validatedData);
 
-        // $category = Category::find($request->category);
-        // $listing->categories()->associate($category);
         return redirect()->route('user.listing.index')
             ->with('success', 'Stworzono nowe ogłoszenie');
     }
@@ -115,7 +113,6 @@ class UserListingController extends Controller
                 'listing' => ListingResource::make($listing),
             ]
         );
-
     }
 
     public function update(Request $request, Listing $listing)
@@ -133,7 +130,8 @@ class UserListingController extends Controller
             ], $messages),
         );
 
-        return redirect()->route('user.listing.index')
-            ->with('success', 'Zaktualizowano ogłoszenie');
+        return $request->user()->id !== $listing->user_id ? 
+        redirect()->route('admin.listings')->with('success', 'Zaktualizowano ogłoszenie') :
+        redirect()->route('user.listing.index')->with('success', 'Zaktualizowano ogłoszenie');
     }
 }

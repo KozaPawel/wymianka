@@ -14,7 +14,7 @@
         <Link
             v-for="link in links.slice(1, -1)" :key="link.label" 
             class="py-2 px-4 rounded-lg transition-colors duration-300 ease-in-out hover:bg-light-primary hover:text-white" 
-            :href="link.url" 
+            :href="link.url ?? ''" 
             :class="{'bg-light-primary text-white': link.active}"
         >
             {{ link.label }}

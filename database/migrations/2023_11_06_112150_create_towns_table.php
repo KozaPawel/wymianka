@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('towns', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('county');
+            $table->string('county')
+                ->nullable();
             $table->string('province');
             $table->double('lat');
             $table->double('lon');

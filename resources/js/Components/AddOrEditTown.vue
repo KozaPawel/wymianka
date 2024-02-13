@@ -1,9 +1,7 @@
 <template>
-    <div class="flex md:items-center md:justify-center">
-        <button class="btn-accent w-full" @click="openModal">
-            Oceń wymianę
-        </button>
-    </div>
+    <button class="mb-2" :class="{'btn-accent w-full': props.town, 'btn-primary': !props.town}" @click="openModal">
+        {{ props.town ? "Edytuj" : "Dodaj nową miejscowość" }}
+    </button>
 
     <TransitionRoot appear :show="isOpen" as="template">
         <Dialog as="div" class="relative z-50" @close="closeModal">
@@ -39,32 +37,39 @@
                                 as="h3"
                                 class="flex flex-row items-center justify-between text-lg font-medium leading-6"
                             >
-                                <p class="break-words">Oceń współpracę z użytkownikiem {{ props.listing.trade_for.user.name }}</p>
+                                <p class="break-words">Nowa miejscowość</p>
                                 <button type="button" class="ml-14 md:ml-0" @click="closeModal">
                                     <XMarkIcon class="h-8 w-8 hover:cursor-pointer" />
                                 </button>
                             </DialogTitle>
                             <div class="flex flex-col mt-2">
                                 <div class="flex flex-col">
-                                    <div class="flex flex-row">
-                                        <StarIcon
-                                            v-for="star in stars" :key="star" 
-                                            class="w-9 h-8 hover:cursor-pointer" 
-                                            :class="{'text-yellow-400': star <= selectedStar, 'hover:text-yellow-400, text-yellow-400': star <= hoverStar, 'text-black': star > hoverStar && hoverStar !== 0}"
-                                            value="star[index]"
-                                            @click="chooseStar(star)"
-                                            @mouseover="hoveredStar(star)" @mouseout="resetHoveredStar"
-                                        />
+                                    <label class="label"> Nazwa </label>
+                                    <input v-model="form.name" type="text" class="input mb-2" required />
+                                    <ErrorMessage :error="form.errors.name" />
+
+                                    <label class="label"> Powiat </label>
+                                    <input v-model="form.county" type="text" class="input mb-2" required />
+                                    <ErrorMessage :error="form.errors.county" />
+
+                                    <label class="label"> Województwo </label>
+                                    <input v-model="form.province" type="text" class="input mb-2" required />
+                                    <ErrorMessage :error="form.errors.province" />
+
+                                    <div class="flex flex-row gap-2">
+                                        <div>
+                                            <label class="label"> Szerokość geograficzna </label>
+                                            <input v-model="form.lat" type="text" class="input" required />
+                                            <ErrorMessage :error="form.errors.lat" />
+                                        </div>
+
+                                        <div>
+                                            <label class="label"> Długość geograficzna </label>
+                                            <input v-model="form.lon" type="text" class="input" required />
+                                            <ErrorMessage :error="form.errors.lon" />
+                                        </div>
                                     </div>
-                                    <ErrorMessage :error="form.errors.rating" />
-
-                                    <p v-if="selectedStar > 0" class="text-md mt-1 ml-1">
-                                        {{ selectedStar }} - {{ starsDescription[selectedStar - 1] }}
-                                    </p>
                                 </div>
-
-                                <label class="text-sm text-gray-600 mt-2">Opis (opcjonalnie)</label>
-                                <textarea v-model="form.summary" class="input h-24" />
                             </div>
   
                             <div class="flex flex-row gap-2 mt-4">
@@ -78,9 +83,9 @@
                                 <button
                                     type="button"
                                     class="btn-primary"
-                                    @click="createReview"
+                                    @click="props.town ? updateTown(town.id) : createTown()"
                                 >
-                                    Wystaw ocenę
+                                    {{ props.town ? "Edytuj miejscowość" : "Dodaj miejscowość" }}
                                 </button>
                             </div>
                         </DialogPanel>
@@ -102,43 +107,16 @@ import {
     DialogPanel,
     DialogTitle,
 } from '@headlessui/vue'
-import { StarIcon, XMarkIcon } from '@heroicons/vue/20/solid'  
+import { XMarkIcon } from '@heroicons/vue/20/solid'  
 
 const props = defineProps({
-    listing: Object,
+    town: Object,
 })
-
-const stars = [1,2,3,4,5]
-
-const starsDescription = [
-    'naganna',
-    'słaba',
-    'przeciętna',
-    'dobra',
-    'idealna',
-]
-
-const selectedStar = ref(0)
-
-const hoverStar = ref(0)
-
-const chooseStar = (value) => {
-    selectedStar.value = value
-    form.rating = value
-}
-
-const hoveredStar = (value) => hoverStar.value = value
-
-const resetHoveredStar = () => hoverStar.value = 0
 
 const isOpen = ref(false)
   
 function closeModal() {
     isOpen.value = false
-    selectedStar.value = 0
-    form.rating = 0
-    form.summary = ''
-    form.errors = {}
 }
 
 function openModal() {
@@ -146,13 +124,18 @@ function openModal() {
 }
 
 const form = useForm({
-    rating: '',
-    summary: '',
-    trade_id: props.listing.trade_id,
-    user_id: props.listing.trade_for.user.id ?? null,
-    by_user_id: props.listing.user.id,
+    name: props.town ? props.town.name : '',
+    county: props.town ? props.town.county : '',
+    province: props.town ? props.town.province : '',
+    lat: props.town ? props.town.lat : '',
+    lon: props.town ? props.town.lon : '',
 })
 
-const createReview = () => form.post(route('user.review.store'))
+const createTown = () => {
+    form.post(route('admin.town.store'))
+}
 
+const updateTown = (townId) => {
+    form.put(route('admin.town.update', {town: townId}))
+}
 </script>
