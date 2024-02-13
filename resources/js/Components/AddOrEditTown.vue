@@ -1,5 +1,5 @@
 <template>
-    <button class="mb-2" :class="{'btn-accent w-full': props.town, 'btn-primary': !props.town}" @click="openModal">
+    <button :class="{'btn-accent w-full mb-2': props.town, 'btn-primary mt-2': !props.town}" @click="openModal">
         {{ props.town ? "Edytuj" : "Dodaj nową miejscowość" }}
     </button>
 
