@@ -9,7 +9,7 @@
         <Link :href="route('admin.categories')" class="btn-accent w-full text-left">
             Kategorie
         </Link>
-        <Link href="/" class="btn-accent w-full text-left">
+        <Link :href="route('admin.towns')" class="btn-accent w-full text-left">
             Miejscowości
         </Link>
     </Box>

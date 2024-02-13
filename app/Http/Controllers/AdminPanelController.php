@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\TownResource;
 use App\Models\Review;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 use App\Http\Resources\UserListingResource;
 use App\Models\Category;
+use App\Models\Town;
 
 class AdminPanelController extends Controller
 {
@@ -44,13 +46,11 @@ class AdminPanelController extends Controller
 
     public function towns()
     {
-        $listings = Listing::mostRecent()
-            ->with('category')
-            ->paginate(20)
-            ->withQueryString();
+        $towns = Town::orderBy('name')
+            ->paginate(50);
 
-        return inertia('AdminPanel/Index', [
-            'listings' => UserListingResource::collection($listings)
+        return inertia('AdminPanel/Town/Index', [
+            'towns' => TownResource::collection($towns)
         ]);
     }
 }

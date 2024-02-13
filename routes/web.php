@@ -16,6 +16,7 @@ use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SearchTownController;
 use App\Http\Controllers\UserListingEndTradeController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\UserListingAcceptOfferController;
@@ -65,7 +66,7 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])
     ->name('verification.send');
 
-Route::get('/towns', TownController::class)->name('towns');
+Route::get('/towns', SearchTownController::class)->name('towns');
 
 Route::prefix('user')
     ->name('user.')
@@ -119,10 +120,14 @@ Route::name('admin.')
             ->name('listings');
         Route::get('/admin/reviews', [AdminPanelController::class, 'reviews'])
             ->name('reviews');
-            Route::get('/admin/categories', [AdminPanelController::class, 'categories'])
+        Route::get('/admin/categories', [AdminPanelController::class, 'categories'])
             ->name('categories');
+        Route::get('/admin/towns', [AdminPanelController::class, 'towns'])
+            ->name('towns');
         Route::delete('/admin/review/{review}', [ReviewController::class, 'destroy'])
             ->name('review.destroy');
         Route::resource('admin/category', CategoryController::class)
             ->only(['store', 'destroy']);
+        Route::resource('admin/town', TownController::class)
+            ->only(['store', 'destroy', 'update']);
     });

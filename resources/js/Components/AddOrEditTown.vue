@@ -1,6 +1,6 @@
 <template>
-    <button class="btn-primary mt-2" @click="openModal">
-        Dodaj nową kategorię
+    <button class="mb-2" :class="{'btn-accent w-full': props.town, 'btn-primary': !props.town}" @click="openModal">
+        {{ props.town ? "Edytuj" : "Dodaj nową miejscowość" }}
     </button>
 
     <TransitionRoot appear :show="isOpen" as="template">
@@ -37,7 +37,7 @@
                                 as="h3"
                                 class="flex flex-row items-center justify-between text-lg font-medium leading-6"
                             >
-                                <p class="break-words">Nowa kategoria</p>
+                                <p class="break-words">Nowa miejscowość</p>
                                 <button type="button" class="ml-14 md:ml-0" @click="closeModal">
                                     <XMarkIcon class="h-8 w-8 hover:cursor-pointer" />
                                 </button>
@@ -45,8 +45,30 @@
                             <div class="flex flex-col mt-2">
                                 <div class="flex flex-col">
                                     <label class="label"> Nazwa </label>
-                                    <input v-model="form.name" type="text" class="input" required />
+                                    <input v-model="form.name" type="text" class="input mb-2" required />
                                     <ErrorMessage :error="form.errors.name" />
+
+                                    <label class="label"> Powiat </label>
+                                    <input v-model="form.county" type="text" class="input mb-2" required />
+                                    <ErrorMessage :error="form.errors.county" />
+
+                                    <label class="label"> Województwo </label>
+                                    <input v-model="form.province" type="text" class="input mb-2" required />
+                                    <ErrorMessage :error="form.errors.province" />
+
+                                    <div class="flex flex-row gap-2">
+                                        <div>
+                                            <label class="label"> Szerokość geograficzna </label>
+                                            <input v-model="form.lat" type="text" class="input" required />
+                                            <ErrorMessage :error="form.errors.lat" />
+                                        </div>
+
+                                        <div>
+                                            <label class="label"> Długość geograficzna </label>
+                                            <input v-model="form.lon" type="text" class="input" required />
+                                            <ErrorMessage :error="form.errors.lon" />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
   
@@ -61,9 +83,9 @@
                                 <button
                                     type="button"
                                     class="btn-primary"
-                                    @click="createCategory"
+                                    @click="props.town ? updateTown(town.id) : createTown()"
                                 >
-                                    Dodaj kategorię
+                                    {{ props.town ? "Edytuj miejscowość" : "Dodaj miejscowość" }}
                                 </button>
                             </div>
                         </DialogPanel>
@@ -87,12 +109,14 @@ import {
 } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/20/solid'  
 
+const props = defineProps({
+    town: Object,
+})
+
 const isOpen = ref(false)
   
 function closeModal() {
     isOpen.value = false
-    form.name = ''
-    form.errors = ''
 }
 
 function openModal() {
@@ -100,11 +124,18 @@ function openModal() {
 }
 
 const form = useForm({
-    name: '',
+    name: props.town ? props.town.name : '',
+    county: props.town ? props.town.county : '',
+    province: props.town ? props.town.province : '',
+    lat: props.town ? props.town.lat : '',
+    lon: props.town ? props.town.lon : '',
 })
 
-const createCategory = () => {
-    form.post(route('admin.category.store'))
+const createTown = () => {
+    form.post(route('admin.town.store'))
 }
 
+const updateTown = (townId) => {
+    form.put(route('admin.town.update', {town: townId}))
+}
 </script>
