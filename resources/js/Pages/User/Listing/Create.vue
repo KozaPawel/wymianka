@@ -1,4 +1,5 @@
 <template>
+    <h1 class="page-title">Dodaj ogłoszenie</h1>
     <form @submit.prevent="create">
         <div class="grid grid-cols-6 gap-4">
             <div class="col-span-6">
