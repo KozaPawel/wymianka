@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use Inertia\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -46,7 +46,8 @@ class HandleInertiaRequests extends Middleware
             'loggedUser' => Auth::user() ? [
                 'id' => Auth::user()->id,
                 'name' => Auth::user()->name,
-                'notificationCount' => Auth::user()->unreadNotifications()->count()
+                'isAdmin' => Auth::user()->is_admin,
+                'notificationCount' => Auth::user()->unreadNotifications()->count(),
             ] : null,
         ]);
     }
