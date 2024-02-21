@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use App\Models\Offer;
+use Illuminate\Support\Facades\Gate;
 
 class UserListingAcceptOfferController extends Controller
 {
     public function __invoke(Offer $offer)
     {
+        if (! Gate::allows('manage-offer', $offer)) {
+            abort(403);
+        }
+
         $listing = $offer->listing;
         $offerListing = Listing::find($offer->offer_listing_id);
 

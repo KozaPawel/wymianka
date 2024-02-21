@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Listing;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
@@ -29,6 +30,19 @@ class AuthServiceProvider extends ServiceProvider
             } else {
                 return $user->id === $listing->user_id;
             }
+        });
+
+        Gate::define('manage-offer', function (User $user, Offer $offer) {
+            $listing = Listing::find($offer->listing_id);
+
+            return $user->id === $listing->user_id;
+        });
+
+        Gate::define('manage-trade', function (User $user, Offer $offer) {
+            $listing = Listing::find($offer->listing_id);
+            $offeredListing = Listing::find($offer->offer_listing_id);
+
+            return $user->id === $listing->user_id || $user->id === $offeredListing->user_id;
         });
     }
 }

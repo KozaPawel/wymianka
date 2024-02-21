@@ -4,11 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use App\Models\Offer;
+use Illuminate\Support\Facades\Gate;
 
 class UserListingCancelTradeController extends Controller
 {
     public function __invoke(Offer $offer)
     {
+        if (! Gate::allows('manage-trade', $offer)) {
+            abort(403);
+        }
+
         $listing = $offer->listing;
         $offerListing = Listing::find($offer->offer_listing_id);
 
