@@ -3,13 +3,12 @@
 namespace App\Notifications;
 
 use App\Http\Resources\UserResource;
-use App\Models\User;
-use App\Models\Offer;
 use App\Models\Listing;
+use App\Models\Offer;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notification;
 
 class OfferPlaced extends Notification
 {
@@ -18,7 +17,7 @@ class OfferPlaced extends Notification
     public function __construct(
         private Offer $offer
     ) {
-        
+
     }
 
     public function via(object $notifiable): array
@@ -31,12 +30,12 @@ class OfferPlaced extends Notification
         $listing = Listing::find($this->offer->listing_id);
 
         return (new MailMessage)
-                    ->subject('Nowa oferta')
-                    ->line("Otrzymano nową ofertę dla {$listing->name}.")
-                    ->action(
-                        'Zobacz oferty wymiany', 
-                        route('user.listing.show', ['listing' => $listing->id])
-                    );
+            ->subject('Nowa oferta')
+            ->line("Otrzymano nową ofertę dla {$listing->name}.")
+            ->action(
+                'Zobacz oferty wymiany',
+                route('user.listing.show', ['listing' => $listing->id])
+            );
     }
 
     public function toArray(object $notifiable): array

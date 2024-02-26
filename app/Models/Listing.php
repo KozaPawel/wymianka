@@ -111,7 +111,14 @@ class Listing extends Model
             )->when(
                 $filters['status'] ?? false,
                 fn ($query, $value) => $value === 'ended' ? $query->whereNotNull('traded_at') :
-                    ($value === 'in_progress' ? $query->where('is_hidden', 1)->whereNull('traded_at') : $query->where('is_hidden', 0))
+                    ($value === 'in_progress' ? $query->where('is_hidden', 1)->where('hidden_by_admin', 0)->whereNull('traded_at')->whereNull('deleted_at') :
+                    $query->where(function ($query) {
+                        $query->where('is_hidden', 0)
+                            ->orWhere(function ($query) {
+                                $query->where('is_hidden', 1)->where('hidden_by_admin', 1);
+                            });
+                    }))
             );
+
     }
 }

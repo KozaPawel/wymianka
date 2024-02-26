@@ -3,10 +3,10 @@
 namespace App\Http\Resources;
 
 use App\Models\Category;
+use App\Models\Listing;
+use App\Models\Review;
 use App\Models\Town;
 use App\Models\User;
-use App\Models\Review;
-use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -60,6 +60,7 @@ class UserListingResource extends JsonResource
             ],
             'userReviewed' => Review::all()->where('by_user_id', $this->owner->id)->where('trade_id', $tradeId)->isNotEmpty(),
             'category' => Category::find($this->category_id),
+            'hidden_by_admin' => $this->hidden_by_admin,
         ];
     }
 }

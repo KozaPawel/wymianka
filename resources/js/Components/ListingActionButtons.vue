@@ -73,14 +73,15 @@
             </div>
         </div>
 
-        <Link
-            v-if="props.listing.timestamps.deleted_at"
-            class="btn-accent w-full"
-            :href="route('user.listing.restore', {listing: props.listing.id})"
-            as="button" method="put"
-        >
-            Przywróć
-        </Link>
+        <div v-if="props.listing.timestamps.deleted_at">
+            <Link
+                class="btn-accent w-full"
+                :href="route('user.listing.restore', {listing: props.listing.id})"
+                as="button" method="put"
+            >
+                Przywróć
+            </Link>
+        </div>
 
         <div v-if="props.listing.timestamps.traded_at && !props.listing.userReviewed">
             <AddUserReview :listing="props.listing" />
