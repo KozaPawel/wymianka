@@ -7,6 +7,7 @@ use App\Http\Resources\ListingResource;
 use App\Http\Resources\UserListingResource;
 use App\Models\Category;
 use App\Models\Listing;
+use App\Notifications\HiddenByAdmin;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,17 +57,42 @@ class UserListingController extends Controller
         );
     }
 
-    public function destroy(Listing $listing)
+    public function destroy(Request $request, Listing $listing)
     {
-        $listing->deleteOrFail();
+        $user = $request->user();
 
-        return redirect()->back()
-            ->with('success', 'Usunięto ogłoszenie');
+        if ($user->id !== $listing->user_id && $user->is_admin) {
+            $listing->owner->notify(
+                new HiddenByAdmin($listing)
+            );
+
+            $listing->is_hidden = true;
+            $listing->hidden_by_admin = true;
+            $listing->save();
+
+            return redirect()->back()
+                ->with('success', 'Ukryto ogłoszenie');
+        } else {
+            $listing->deleteOrFail();
+
+            return redirect()->back()
+                ->with('success', 'Usunięto ogłoszenie');
+        }
     }
 
-    public function restore(Listing $listing)
+    public function restore(Request $request, Listing $listing)
     {
-        $listing->restore();
+        $user = $request->user();
+
+        if ($user->id !== $listing->user_id && $user->is_admin) {
+
+            $listing->is_hidden = false;
+            $listing->hidden_by_admin = false;
+            $listing->save();
+
+        } else {
+            $listing->restore();
+        }
 
         return redirect()->back()
             ->with('success', 'Przywrócono ogłoszenie');
@@ -130,7 +156,7 @@ class UserListingController extends Controller
             ], $messages),
         );
 
-        return $request->user()->id !== $listing->user_id ? 
+        return $request->user()->id !== $listing->user_id ?
         redirect()->route('admin.listings')->with('success', 'Zaktualizowano ogłoszenie') :
         redirect()->route('user.listing.index')->with('success', 'Zaktualizowano ogłoszenie');
     }

@@ -21,6 +21,12 @@
                 </Link>
             </div>
 
+            <div v-if="notification.type === 'App\\Notifications\\HiddenByAdmin'">
+                Administrator ukrył twój przedmiot 
+                {{ notification.data.listing.name }}
+                z powodu: Niecenzuralne treści
+            </div>
+
             <div>
                 <Link
                     v-if="!notification.read_at" 

@@ -17,6 +17,12 @@
     >
         Wystawiony
     </div>
+    <div 
+        v-if="listing.hidden_by_admin" 
+        class="listing-label bg-purple-500"
+    >
+        Ukryty przez administratora
+    </div>
 </template>
 
 <script setup>

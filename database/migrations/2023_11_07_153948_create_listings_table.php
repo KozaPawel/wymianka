@@ -23,6 +23,8 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('is_hidden')
                 ->default(false);
+            $table->boolean('hidden_by_admin')
+                ->default(false);
             $table->timestamp('traded_at')
                 ->nullable();
             $table->timestamps();

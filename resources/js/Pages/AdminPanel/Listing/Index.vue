@@ -37,7 +37,7 @@
                                 {{ shortDescription(listing.description) }}...
                             </td>
                             <td class="px-2 py-3">
-                                <div class="flex justify-center">
+                                <div class="flex flex-col gap-2 justify-center">
                                     <ListingLabel :listing="listing" />
                                 </div>
                             </td>
@@ -55,10 +55,18 @@
                                     </Link>
 
                                     <button 
+                                        v-if="!listing.hidden_by_admin"
                                         class="btn-danger w-full" 
-                                        @click.once="deleteListing(listing.id)"
+                                        @click.once="hideListing(listing.id)"
                                     >
-                                        Usuń
+                                        Ukryj
+                                    </button>
+                                    <button 
+                                        v-else 
+                                        class="btn-accept w-full"
+                                        @click.once="restoreListing(listing.id)"
+                                    >
+                                        Przywróć
                                     </button>
                                 </div>
                             </td>
@@ -88,7 +96,11 @@ const shortDescription = (value) => {
     return value.slice(0,50)
 }
 
-const deleteListing = (listingId) => {
+const hideListing = (listingId) => {
     router.delete(route('user.listing.destroy', {listing: listingId}))
+}
+
+const restoreListing = (listingId) => {
+    router.put(route('user.listing.restore', {listing: listingId}))
 }
 </script>
